@@ -9,8 +9,9 @@ from flask import Flask, request, jsonify, render_template, send_file, Response
 import contractions
 import unidecode
 import spacy
-from nltk.stem import WordNetLemmatizer
+from num2words import num2words
 
+# internal module
 import os
 import re
 
@@ -65,11 +66,32 @@ def expander(text):
 
 ##
 # short string remover
-def short_remover(text, size):
+def short_line_remover(text, size):
     if len(text) <= size:
         return False
 
     return True
+
+
+##
+# short word remover
+def short_word_remover(text, size):
+    rule = r'\W*\b\w{1,' + str(size) + r'}\b'
+    shortword = re.compile(rule)
+
+    result = shortword.sub('', text)
+
+    return result
+
+
+##
+# special character remover
+def special_remover(text, special):
+    special = '[' + special + ']'
+
+    result = re.sub(special, "", text)
+
+    return result
 
 
 ##
@@ -119,6 +141,22 @@ def comma_normalizer(text, stops):
     result = re.sub(stops, ",", text)
 
     return result
+
+
+##
+# number to word
+# ex) He is 3 years-old. -> He is three years-old.
+def number_changer(text):
+    text = text.split
+
+    for idx in range(len(text)):
+        if text[idx].isdecimal():
+            text[idx] = num2words(text[idx])
+
+    result = " ".join(text)
+
+    return result
+
 
 
 @app.route('/processor')
