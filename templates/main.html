@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>Script parser</title>
+    <title>Text pre-processor</title>
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
@@ -24,20 +24,43 @@
         processing_option = ["to_capitalize", "to_lower", "accent", "expander", "short_line_remover", "short_word_remover",
                              "emoji_remover", "special_remover", "special_replacer", "lemmatizer", "space_normalizer",
                              "full_stop_normalizer", "comma_normalizer", "number_changer"];
+        need_value = ["comma_normalizer", "full_stop_normalizer", "special_replacer", "special_remover", "short_word_remover",
+                      "short_line_remover"];
         flag = false;
 
-        processing_checkbox.innerHTML = make_select_list();
+        add_list();
     }
+
+
+    function show_input_box(id, value) {
+        let parent = document.getElementById(id).parentNode;
+
+        if (need_value.includes(value)){
+            if (parent.getElementsByTagName("input").length == 0){
+                let input = document.createElement("input");
+                input.type = "text";
+                input.id = "weight_${idx}";
+                input.style = style="width:50px";
+
+                parent.appendChild(input);
+            }
+        } else {
+            if (parent.getElementsByTagName("input").length == 1){
+                parent.removeChild(parent.lastChild);
+            }
+        }
+    }
+
 
     function make_select_list(){
 
-        select_list = `<select id="name_${idx}" style="width:110pt">`;
+        select_list = `<select id="name_${idx}" class="options" onchange="show_input_box(this.id, this.value);" style="width:150pt">`;
 
         for (let i in processing_option) {
             select_list += `<option value="${processing_option[i]}">${processing_option[i]}</option>`;
         }
 
-        select_list += `</select><br>`;
+        select_list += `</select>&nbsp;&nbsp;&nbsp;&nbsp;`;
 
         idx += 1;
 
@@ -45,16 +68,35 @@
     }
 
 
+    // 전처리 옵션항목 추가
     function add_list() {
-        processing_checkbox.innerHTML += make_select_list();
+        let new_option = document.createElement("label");
+        new_option.innerHTML = make_select_list();
+        let br = document.createElement("br");
+
+        processing_checkbox.appendChild(new_option);
+        processing_checkbox.appendChild(br);
     }
 
 
+    // 전처리 옵션항목 제거
     function remove_list(){
         if (processing_checkbox.childElementCount / 2 > 1) {
             processing_checkbox.removeChild(processing_checkbox.lastChild);
             processing_checkbox.removeChild(processing_checkbox.lastChild);
         }
+    }
+
+
+    function get_options() {
+        let nodes = processing_checkbox.getElementsByClassName("options");
+        let options = [];
+
+        for (let i=0; i < nodes.length; i++) {
+            options.push(nodes[i].value);
+        }
+
+        return options;
     }
 
 
@@ -71,44 +113,30 @@
     }
 
 
-    // 스크립트 파일 제작 리퀘스트
-    function send_script_req() {
+    // 전처리 리퀘스
+    function send_req() {
         if (double_submit_check()){
             return ;
         }
 
-        const csv_file = document.getElementById("csv_file").files[0];
-        const name = document.getElementById("name").value;
-        const dialog = document.getElementById("dialog").value;
+        const text_file = document.getElementById("text_file").files[0];
 
-        if (csv_file == undefined) {
-            document.getElementById('warning').innerText = 'Please upload CSV file';
+        if (text_file == undefined) {
+            document.getElementById('warning').innerText = 'Please upload Text file';
             flag = false;
-            return ;
-        }
-
-        if (name == '') {
-            document.getElementById('name_warning').innerText = 'Please fill name idx';
-            flag = false;
-
-            return ;
-        }
-
-        if (dialog == '') {
-            document.getElementById('dialog_warning').innerText = 'Please fill dialog idx';
-            flag = false;
-
             return ;
         }
 
         const formData = new FormData();
-        const url = "/csv/script";
-        const file_name = csv_file['name'].split('.')[0];
+        const url = "/dpp";
+        const options = get_options();
+
+        console.log(options);
+
         let start = 0;
 
-        formData.append('file', csv_file);
-        formData.append('name', name);
-        formData.append('dialog', dialog);
+        formData.append('text_file', text_file);
+        formData.append('options', options);
 
         // set timer
         timer = setInterval(() => {
@@ -131,14 +159,7 @@
             flag = false;
             document.getElementById('warning').innerText = err;
         }).then(data => {
-            let result_url = window.URL.createObjectURL(data);
-            let dl_btn = document.getElementById('download_btn');
-            let a = document.createElement('a');
-            a.href = result_url;
-            a.download = `${file_name}_script.txt`;
-            a.innerHTML = `${file_name} Script Download<br>`;
 
-            dl_btn.appendChild(a);
 
             clearInterval(timer);
             time_obj.innerText = 'Done!';
@@ -191,16 +212,6 @@
                 <a>Sample reference : </a><a href="https://www.kaggle.com/feniksm/simpsons?select=script_lines.csv">Kaggle</a>
             </div>
 
-            <hr width="90%">
-
-            <div class="menu">
-                <h3>Menu</h3>
-                <ul>
-                    <li><a href="/">CSV script parsing.</a></li>
-                    <li><a href="/json">Json script parsing.</a></li>
-                </ul>
-            </div>
-
             <br><hr width="90%">
 
             <div class="Notice">
@@ -230,27 +241,17 @@
 
                 <br>
 
-                <div class="heading_parser">
-                    <h3>CSV head parsing</h3><br>
-                    <button class="btn btn-primary btn=lg" type="submit" id="p_button" onclick="send_parsing_req();">Parsing</button>
-                    <br><br>
-                    <h4>Parsing result&nbsp;&nbsp;&nbsp;</h4>
-                    <!-- Parsing result table -->
-                    <table id="heading_table" width="100%"></table>
-                </div>
-
                 <br><br>
 
-                <div class="script_maker">
+                <div class="pre-processor">
                     <h3><label>Text pre-processor</label></h3>
+                    <h4>Pre-processing options</h4>
                     <!-- Pre-processing option checkbox -->
-                    <label id="options">
-
-                    </label>
+                    <label id="options"></label>
                     <label>&nbsp;&nbsp;&nbsp;&nbsp;</label>
                     <button class="btn btn-primary btn=lg" type="submit" id="add_btn" onclick="add_list();">ADD</button>
                     <button class="btn btn-primary btn=lg" type="submit" id="del_btn" onclick="remove_list();">DEL</button><br>
-                    <button class="btn btn-primary btn=lg" type="submit" id="s_button" onclick="send_script_req();">Making</button>
+                    <button class="btn btn-primary btn=lg" type="submit" id="s_button" onclick="send_req();">Making</button>
                     <br><br>
                     <h4>Pre-processing result&nbsp;&nbsp;&nbsp;<label id="timer"></label></h4>
                     <label id="download_btn"></label>
