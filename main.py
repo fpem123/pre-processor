@@ -89,9 +89,20 @@ def short_word_remover(text, size):
 def special_remover(text, special):
     special = '[' + special + ']'
 
-    result = re.sub(special, "", text)
+    result = re.sub(special, " ", text)
 
     return result
+
+
+##
+# special character remover
+def special_replacer(text, specials):
+    text: str
+
+    for special in specials:
+        text = text.replace(special[0], special[1])
+
+    return text
 
 
 ##
@@ -112,7 +123,7 @@ def lemmatizer(text):
 
 ##
 # Reduce whitespace to one
-# ex) Hello,  guy -> Hello, guy
+# ex) Hello,    guy -> Hello, guy
 def space_normalizer(text):
     result = " ".join(text.split())
 
@@ -156,7 +167,6 @@ def number_changer(text):
     result = " ".join(text)
 
     return result
-
 
 
 @app.route('/processor')
