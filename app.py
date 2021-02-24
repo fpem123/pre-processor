@@ -89,6 +89,7 @@ def accent(text):
 # Expand the abbreviation.
 # ex) can't => can not
 def expander(text):
+
     result = contractions.fix(text)
 
     return result
@@ -199,13 +200,7 @@ def comma_normalizer(text, stops):
 # number to word
 # ex) He is 3 years-old. -> He is three years-old.
 def number_changer(text):
-    text = text.split(" ")
-
-    for idx in range(len(text)):
-        if text[idx].isdecimal():
-            text[idx] = num2words(text[idx])
-
-    result = " ".join(text)
+    result = re.sub('\d+', lambda n: num2words(int(n.group())), text)
 
     return result
 
