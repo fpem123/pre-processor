@@ -2,7 +2,7 @@
     Name: main.py
     Writer: Hoseop Lee, Ainizer
     Rule: Flask app
-    update: 21.02.22
+    update: 21.02.24
 '''
 # external module
 from flask import Flask, request, jsonify, render_template, send_file, Response

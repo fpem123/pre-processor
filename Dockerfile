@@ -1,4 +1,4 @@
-FROM python3
+FROM python
 
 RUN pip install --upgrade pip
 
