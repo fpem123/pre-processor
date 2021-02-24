@@ -12,11 +12,19 @@ import spacy
 from num2words import num2words
 
 # internal module
+from werkzeug.utils import secure_filename
+from threading import Thread
+from queue import Queue, Empty
+import time
 import os
 import re
 
 
 app = Flask(__name__)
+
+requests_queue = Queue()
+BATCH_SIZE = 1
+CHECK_INTERVAL = 0.1
 
 UPLOAD_FOLDER = './data/upload'
 RESULT_FOLDER = './data/result'
@@ -28,6 +36,29 @@ if not os.path.isdir(UPLOAD_FOLDER):
 
 if not os.path.isdir(RESULT_FOLDER):
     os.mkdir(RESULT_FOLDER)
+
+
+
+
+def handle_requests_by_batch():
+    while True:
+        request_batch = []
+
+        while not (len(request_batch) >= BATCH_SIZE):
+            try:
+                request_batch.append(requests_queue.get(timeout=CHECK_INTERVAL))
+            except Empty:
+                continue
+
+            for requests in request_batch:
+
+                try:
+                    requests["output"] = transform(requests['input'][0], requests['input'][1])
+                except Exception as e:
+                    requests["output"] = e
+
+
+handler = Thread(target=handle_requests_by_batch).start()
 
 
 ##
@@ -80,6 +111,14 @@ def short_word_remover(text, size):
     shortword = re.compile(rule)
 
     result = shortword.sub('', text)
+
+    return result
+
+
+##
+# emoji remover
+def emoji_remover(text):
+    result = text.encode('ascii', 'ignore').decode('ascii')
 
     return result
 
@@ -169,10 +208,69 @@ def number_changer(text):
     return result
 
 
-@app.route('/processor')
-def processor():
+def transform(file, options):
+    # 파일 저장
+    filename = secure_filename(file.filename)
+    input_path = os.path.join(UPLOAD_FOLDER, filename)
+    file.save(input_path)
 
-    return
+    result_path = os.path.join(RESULT_FOLDER, filename)
+
+    print(options)
+
+    try:
+        with open(input_path, 'r', encoding='utf-8-sig') as f:
+            lines = f.readlines()
+
+            for option in options:
+                print(option)
+                pass
+
+    except:
+        pass
+
+    os.remove(input_path)
+    os.remove(result_path)
+
+    return 0
+
+
+def option_transform(options):
+    options = options.split(",")
+
+    return options
+
+
+@app.route('/dpp', methods=['POST'])
+def processor():
+    try:
+        if requests_queue.qsize() > BATCH_SIZE:
+            return jsonify({'Error': 'Too Many Requests'}), 429
+
+        args = []
+
+        text_file = request.files['text_file']
+        options = request.form.getlist('options')
+
+        args.append(text_file)
+        args.append(options)
+
+    except Exception as e:
+        return jsonify({'error': e}), 400
+
+    req = {"input": args}
+    requests_queue.put(req)
+
+    while 'output' not in req:
+        time.sleep(CHECK_INTERVAL)
+
+    result = req['output']
+
+    if result:
+        return
+        #return send_file(result[0], mimetype='text/plain', attachment_filename=result[1]), 200
+    else:
+        return result
 
 
 ##

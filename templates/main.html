@@ -32,29 +32,26 @@
     }
 
 
+    // 추가적인 값을 필요로 하는 옵션에 input 박스 추
     function show_input_box(id, value) {
         let parent = document.getElementById(id).parentNode;
 
-        if (need_value.includes(value)){
-            if (parent.getElementsByTagName("input").length == 0){
-                let input = document.createElement("input");
-                input.type = "text";
-                input.id = "weight_${idx}";
-                input.style = style="width:50px";
+        if (need_value.includes(value) && parent.getElementsByTagName("input").length == 0){
+            let input = document.createElement("input");
+            input.type = "text";
+            input.id = `${id}_value`;
+            input.style = style="width:50px";
 
-                parent.appendChild(input);
-            }
-        } else {
-            if (parent.getElementsByTagName("input").length == 1){
+            parent.appendChild(input);
+        } else if (parent.getElementsByTagName("input").length == 1){
                 parent.removeChild(parent.lastChild);
-            }
         }
     }
 
 
     function make_select_list(){
 
-        select_list = `<select id="name_${idx}" class="options" onchange="show_input_box(this.id, this.value);" style="width:150pt">`;
+        select_list = `<select id="option_${idx}" class="options" onchange="show_input_box(this.id, this.value);" style="width:150pt">`;
 
         for (let i in processing_option) {
             select_list += `<option value="${processing_option[i]}">${processing_option[i]}</option>`;
@@ -71,7 +68,9 @@
     // 전처리 옵션항목 추가
     function add_list() {
         let new_option = document.createElement("label");
+        new_option.id = `list_${idx}`;
         new_option.innerHTML = make_select_list();
+
         let br = document.createElement("br");
 
         processing_checkbox.appendChild(new_option);
@@ -88,13 +87,27 @@
     }
 
 
+    // 옵션 값 획득
     function get_options() {
-        let nodes = processing_checkbox.getElementsByClassName("options");
-        let options = [];
+        let nodes = processing_checkbox.getElementsByTagName("label");
+
+        let options = {};
 
         for (let i=0; i < nodes.length; i++) {
-            options.push(nodes[i].value);
+            if (nodes[i].childNodes.length == 2)
+            {
+                let _select = nodes[i].getElementsByTagName("select")[0].value;
+                options[_select] = false;
+            }
+            else if (nodes[i].childNodes.length == 3)
+            {
+                let _select = nodes[i].getElementsByTagName("select")[0].value;
+                let _input = nodes[i].getElementsByTagName("input")[0].value;
+                options[_select] = _input;
+            }
         }
+
+        console.log(options);
 
         return options;
     }
@@ -136,7 +149,7 @@
         let start = 0;
 
         formData.append('text_file', text_file);
-        formData.append('options', options);
+        formData.append('options', JSON.stringify(options));
 
         // set timer
         timer = setInterval(() => {
@@ -205,11 +218,11 @@
             <div class="intro">
                 <br>
                 <!-- Project title -->
-                <h1>Script parser</h1><br>
-                <a>Make script text file using csv parsing.</a><br><br>
-                <a>Git hub repository : </a> <a href="https://github.com/fpem123/script-parser" target="_blank">script-parser</a><br>
-                <a>Open API : </a> <a href="https://ainize.ai/fpem123/script-parser" target="_blank">On Ainize</a><br>
-                <a>Sample reference : </a><a href="https://www.kaggle.com/feniksm/simpsons?select=script_lines.csv">Kaggle</a>
+                <h1>Text pre-processor</h1><br>
+                <a>Text pre-processor.</a><br><br>
+                <a>Git hub repository : </a> <a href="https://github.com/fpem123/script-parser" target="_blank">..</a><br>
+                <a>Open API : </a> <a href="https://ainize.ai/fpem123/script-parser" target="_blank">..</a><br>
+                <a>Sample reference : </a><a href="https://www.kaggle.com/feniksm/simpsons?select=script_lines.csv">..</a>
             </div>
 
             <br><hr width="90%">
@@ -217,16 +230,13 @@
             <div class="Notice">
                 <h3>Notice</h3>
                 <ul>
-                    <li>This is csv script parser.</li>
-                    <li><a href="/csv/sample_download" download="sample.csv">Sample download</a></li>
+                    <li>This is Text pre-processor.</li>
+                    <li><a href="/csv/sample_download" download="sample.csv">None</a></li>
                 </ul>
 
                 <h3>How to use?</h3>
                 <ul>
-                    <li>1st, Upload csv file.</li>
-                    <li>2nd, Click "Parsing" button. And, get csv file's meta information.</li>
-                    <li>3rd, Fill column index "Number" in Name index number and also Dialog index number.</li>
-                    <li>4th, Click Making button.</li>
+                    <li>1st, Upload Text file.</li>
                 </ul>
             </div>
 
