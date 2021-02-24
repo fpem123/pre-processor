@@ -26,8 +26,8 @@
         time_obj = document.getElementById("timer");
 
         processing_checkbox = document.getElementById("options");
-        processing_option = ["to_capitalize", "to_lower", "accent", "expander", "short_line_remover", "short_word_remover",
-                             "emoji_remover", "special_remover", "special_replacer", "lemmatizer", "space_normalizer",
+        processing_option = ["space_normalizer", "to_capitalize", "to_lower", "accent", "expander", "short_line_remover",
+                             "short_word_remover", "emoji_remover", "special_remover", "special_replacer", "lemmatizer",
                              "full_stop_normalizer", "comma_normalizer", "number_changer"];
         need_value = ["comma_normalizer", "full_stop_normalizer", "special_replacer", "special_remover", "short_word_remover",
                       "short_line_remover"];
@@ -37,19 +37,21 @@
     }
 
 
-    // 추가적인 값을 필요로 하는 옵션에 input 박스 추
+    // 추가적인 값을 필요로 하는 옵션에 input 박스 추가
     function show_input_box(id, value) {
         let parent = document.getElementById(id).parentNode;
 
-        if (need_value.includes(value) && parent.getElementsByTagName("input").length == 0){
-            let input = document.createElement("input");
-            input.type = "text";
-            input.id = `${id}_value`;
-            input.style = style="width:50px";
+        if (need_value.includes(value)) {
+            if (parent.getElementsByTagName("input").length == 0){
+                let input = document.createElement("input");
+                input.type = "text";
+                input.id = `${id}_value`;
+                input.style = style="width:50px";
 
-            parent.appendChild(input);
+                parent.appendChild(input);
+            }
         } else if (parent.getElementsByTagName("input").length == 1){
-                parent.removeChild(parent.lastChild);
+            parent.removeChild(parent.lastChild);
         }
     }
 

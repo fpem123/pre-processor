@@ -97,10 +97,10 @@ def expander(text):
 ##
 # short string remover
 def short_line_remover(text, size):
-    if len(text) <= size:
-        return False
+    if len(text) <= int(size):
+        text = ''
 
-    return True
+    return text
 
 
 ##
@@ -164,8 +164,11 @@ def lemmatizer(text):
 # ex) Hello,    guy -> Hello, guy
 def space_normalizer(text):
     result = " ".join(text.split())
+    print(result)
+    if result == "":
+        return result
 
-    return result
+    return result + " "
 
 
 ##
@@ -196,7 +199,7 @@ def comma_normalizer(text, stops):
 # number to word
 # ex) He is 3 years-old. -> He is three years-old.
 def number_changer(text):
-    text = text.split
+    text = text.split(" ")
 
     for idx in range(len(text)):
         if text[idx].isdecimal():
@@ -220,6 +223,7 @@ def transform(file, option, value):
     try:
         with open(input_path, 'r', encoding='utf-8-sig') as f:
             lines = f.readlines()
+
             with open(result_path, 'w', encoding='utf-8') as r:
 
                 for line in lines:
@@ -252,7 +256,7 @@ def transform(file, option, value):
                     elif option == "number_changer":
                         line = number_changer(line)
 
-                    r.write(line + " ")
+                    r.write(line)
 
     except Exception as e:
         print('Error occur in pre-processing!', e)
