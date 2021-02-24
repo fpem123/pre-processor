@@ -311,6 +311,13 @@ def processor():
 
 
 ##
+# 샘플 다운로드 링크
+@app.route('/sample_download')
+def send_csv_sample():
+    return send_file('data/test.txt', mimetype='text/plain', attachment_filename='sample.txt'), 200
+
+
+##
 # Sever health checking page.
 @app.route('/healthz', methods=["GET"])
 def health_check():
