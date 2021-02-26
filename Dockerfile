@@ -9,7 +9,7 @@ RUN pip install num2words && \
     pip install waitress && \
     pip install Unidecode && \
     pip install flask && \
-    pip install pyahocorasick
+    pip install pyahocorasick==1.0.0
 RUN pip install contractions
 
 # spacy module and spacy model download
