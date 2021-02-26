@@ -33,6 +33,8 @@ RESULT_FOLDER = './data/result'
 
 device = 'cuda' if torch.cuda.is_available() else 'cpu'     # gpu check
 
+print(device)
+
 if device == 'cuda':
     spacy.prefer_gpu()      # spacy run GPU
 
