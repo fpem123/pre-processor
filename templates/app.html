@@ -26,9 +26,9 @@
         time_obj = document.getElementById("timer");
 
         processing_checkbox = document.getElementById("options");
-        processing_option = ["space_normalizer", "to_capitalize", "to_lower", "accent", "expander", "short_line_remover",
-                             "short_word_remover", "emoji_remover", "special_remover", "special_replacer", "lemmatizer",
-                             "full_stop_normalizer", "comma_normalizer", "number_changer", "number_normalizer", "word_replacer"];
+        processing_option = ["space_normalizer", "to_capitalize", "to_lower", "accent", "expander", "emoji_remover", "lemmatizer",
+                             "number_changer", "number_normalizer", "short_line_remover", "short_word_remover", "full_stop_normalizer",
+                             "comma_normalizer", "special_remover", "special_replacer", "word_replacer"];
         need_value = ["comma_normalizer", "full_stop_normalizer", "special_remover", "short_word_remover",
                       "short_line_remover", "number_normalizer"];
         need_three_value = ["special_replacer", "word_replacer"];
@@ -304,6 +304,10 @@
                 <h3>How to use?</h3>
                 <ul>
                     <li>1st, Upload Text file.</li>
+                    <li>Second, Select pre-processing option.</li>
+                    <li>If the option requires an additional value, fill in the input box.</li>
+                    <li>If the option requires an more additional value, fill in second input box.</li>
+                    <li>If you want to do multiple pre-processing, you can add them by pressing the ADD button.</li>
                 </ul>
             </div>
 
@@ -317,6 +321,27 @@
                 </div>
 
                 <br>
+
+                <div id="option_info">
+                    <ul>//16
+                        <li>space_normalizer: Whitespace normalization. (Including newline removal). No additional value required.</li>
+                        <li>to_capitalize: Capitalize only the first letter of the line, and change the rest to lowercase. No additional value required.</li>
+                        <li>to_lower: Change all words to lowercase. No additional value required.</li>
+                        <li>accent: Replace accented characters like ï with regular characters. No additional value required.</li>
+                        <li>expander: Increases the abbreviation. (can't → can not). No additional value required.</li>
+                        <li>emoji_remover: Remove emojis. No additional value required.</li>
+                        <li>lemmatizer: Turns all words into basic form. (is -> be, bats -> bat). No additional value required.</li>
+                        <li>number_changer: Turn numbers into words. No additional value required.</li>
+                        <li>number_normalizer: Replace the number with another one you entered. Need additional value.</li>
+                        <li>short_line_remover: It also takes a number and removes the lines shorter than the number. Need additional value.</li>
+                        <li>short_word_remover: It also takes a number and removes words shorter than the number. Need additional value.</li>
+                        <li>full_stop_normalizer: It receives special characters and turns them all into dot. Need additional value.</li>
+                        <li>comma_normalizer: Receive special characters and turn them all into commas. Need additional value.</li>
+                        <li>special_remover: Receive the special characters to be deleted and delete them all. Need additional value.</li>
+                        <li>special_replacer: Input and replace special characters and words to be replaced. Need additional value, value2.</li>
+                        <li>word_replacer: Replace the word with another one you entered. Need additional value, value2.</li>
+                    </ul>
+                </div>
 
                 <br><br>
 
