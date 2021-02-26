@@ -1,13 +1,11 @@
-FROM pytorch/pytorch:1.5.1-cuda10.1-cudnn7-runtime
+FROM pytorch/pytorch:1.6.0-cuda10.1-cudnn7-runtime
 
 RUN pip install --upgrade pip
 RUN pip install num2words && \
     pip install waitress && \
     pip install Unidecode && \
-    pip install flask
-
-RUN pip install pyahocorasick==1.4.0
-RUN pip install contractions
+    pip install flask && \
+    pip install contractions
 
 # spacy module and spacy model download
 RUN pip install -U pip setuptools wheel
