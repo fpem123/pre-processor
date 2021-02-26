@@ -31,7 +31,7 @@ CHECK_INTERVAL = 0.1
 UPLOAD_FOLDER = './data/upload'
 RESULT_FOLDER = './data/result'
 
-device = torch.device('cuda' if torch.cuda.is_available() else 'cpu') # gpu check
+device = 'cuda' if torch.cuda.is_available() else 'cpu'     # gpu check
 
 if device == 'cuda':
     spacy.prefer_gpu()      # spacy run GPU
