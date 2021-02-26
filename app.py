@@ -311,8 +311,8 @@ def processor():
 
         text_file = request.files['text_file']
         option = request.form['option']
-        value = request.form['value']
-        value2 = request.form['value2']
+        value = request.form['value'] if 'value' in request.form else False
+        value2 = request.form['value2'] if 'value2' in request.form else False
 
         args.append(text_file)
         args.append(option)
