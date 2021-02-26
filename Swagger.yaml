@@ -1,0 +1,93 @@
+openapi: 3.0.0   # Open api version
+
+info:
+  title: Pre-procssor for NLP
+  version: "v0.1"
+  contact:
+    name: AInizer - Lee hoseop
+  description: |
+    This app is text pre-processor for NLP.!
+    ---
+      How to use:
+      * First, Uplad Text file.
+      * Second, Select pre-processing option.
+      * If the option requires an additional value, fill in the "value".
+      * If the option requires an additional value, fill in the "value2".
+
+servers:
+  - url: https://master-pre-processor-fpem123.endpoint.ainize.ai/
+
+paths:
+  /dpp:
+    post:
+      requestBody:
+        required: true
+        description: |
+          This request receives a file and preprocesses it..
+
+
+          Sample downlaod: [Sample](https://master-pre-processor-fpem123.endpoint.ainize.ai/sample_download)
+
+
+          - Option that does not require additional value
+
+
+              "space_normalizer", "to_capitalize", "to_lower", "accent", "expander", "emoji_remover", "lemmatizer", "number_changer"
+
+
+          - Option requiring additional value
+
+
+              "comma_normalizer", "full_stop_normalizer", "special_remover", "short_word_remover", "short_line_remover", "number_normalizer"
+
+
+          - Option requiring additional value, value2
+
+
+              "special_replacer", "word_replacer"
+
+
+          - curl example
+
+
+              curl -X POST "https://master-pre-processor-fpem123.endpoint.ainize.ai/dpp" -H "accept: text/plain" -H "Content-Type: multipart/form-data" -F "option=comma_normalizer" -F "value=;-" -F "value2=" -F "text_file=@sample.txt;type=text/plain"
+
+
+
+
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                text_file:
+                  type: string
+                  format: binary
+                  description: "Text file you want to pre-process."
+                option:
+                  type: string
+                  enum: [ "space_normalizer", "to_capitalize", "to_lower", "accent", "expander", "short_line_remover",
+                          "short_word_remover", "emoji_remover", "special_remover", "special_replacer", "lemmatizer",
+                          "full_stop_normalizer", "comma_normalizer", "number_changer", "number_normalizer", "word_replacer" ]
+                  description: "The pre-processing option."
+                value:
+                  type: string
+                  description: "The value required by the specific option."
+                value2:
+                  type: string
+                  description: "Second value required by specific option."
+
+      responses:   # Set response
+        '200':
+          description: "Successful Response"
+          content:
+            text/plain:
+              schema:
+                type: object
+        '400':
+          description: "Bad Request Error"
+        '429':
+          description: "Too many requests"
+        '500':
+          description: "Server-side Error"
+
