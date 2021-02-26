@@ -9,7 +9,7 @@ RUN pip install num2words && \
 
 # spacy module and spacy model download
 RUN pip install -U pip setuptools wheel
-RUN pip install -U spacy[cuda102]
+RUN pip install -U spacy[cuda101]
 RUN python -m spacy download en_core_web_sm
 
 WORKDIR /app
