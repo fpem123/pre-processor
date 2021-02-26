@@ -17,6 +17,9 @@ This project pre-processor web server for NLP.
 ### How to use
 
     * First, Upload text file
+    * Second, Select pre-processing option.
+    * If the option requires an additional value, fill in the "value".
+    * If the option requires an additional value, fill in the "value2".
 
 
 ### Pre-processing option
@@ -69,6 +72,10 @@ This project pre-processor web server for NLP.
 ## * With CLI *
 
 ### Input example
+
+
+Sample data download: [GitHub](https://github.com/fpem123/pre-processor/blob/master/data/test.txt)
+
 
 * space_normalizer
 
