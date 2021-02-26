@@ -28,9 +28,11 @@
         processing_checkbox = document.getElementById("options");
         processing_option = ["space_normalizer", "to_capitalize", "to_lower", "accent", "expander", "short_line_remover",
                              "short_word_remover", "emoji_remover", "special_remover", "special_replacer", "lemmatizer",
-                             "full_stop_normalizer", "comma_normalizer", "number_changer"];
-        need_value = ["comma_normalizer", "full_stop_normalizer", "special_replacer", "special_remover", "short_word_remover",
-                      "short_line_remover"];
+                             "full_stop_normalizer", "comma_normalizer", "number_changer", "number_normalizer", "word_replacer"];
+        need_value = ["comma_normalizer", "full_stop_normalizer", "special_remover", "short_word_remover",
+                      "short_line_remover", "number_normalizer"];
+        need_three_value = ["special_replacer", "word_replacer"];
+
         flag = false;
 
         add_list();
@@ -41,17 +43,40 @@
     function show_input_box(id, value) {
         let parent = document.getElementById(id).parentNode;
 
+        // input 박스 삭제
+        if (parent.childElementCount != 1) {
+            parent.removeChild(parent.lastChild);
+        }
+
         if (need_value.includes(value)) {
             if (parent.getElementsByTagName("input").length == 0){
+                let label = document.createElement("label");
                 let input = document.createElement("input");
+
                 input.type = "text";
-                input.id = `${id}_value`;
+                input.className = "value";
                 input.style = style="width:50px";
 
-                parent.appendChild(input);
+                label.appendChild(input);
+                parent.appendChild(label);
             }
-        } else if (parent.getElementsByTagName("input").length == 1){
-            parent.removeChild(parent.lastChild);
+        } else if (need_three_value.includes(value)) {
+            if (parent.getElementsByTagName("input").length == 0){
+                let label = document.createElement("label");
+                let input = document.createElement("input");
+                let input2 = document.createElement("input");
+
+                input.type = "text";
+                input.className = "value";
+                input.style = style="width:50px";
+                input2.type = "text";
+                input2.className = "value2";
+                input2.style = style="width:50px";
+
+                label.appendChild(input);
+                label.appendChild(input2);
+                parent.appendChild(label);
+            }
         }
     }
 
@@ -76,7 +101,9 @@
     // 전처리 옵션항목 추가
     function add_list() {
         let new_option = document.createElement("label");
+
         new_option.id = `list_${idx}`;
+        new_option.className = "option";
         new_option.innerHTML = make_select_list();
 
         let br = document.createElement("br");
@@ -97,22 +124,28 @@
 
     // 옵션 값 획득
     function get_options() {
-        let nodes = processing_checkbox.getElementsByTagName("label");
+        let nodes = processing_checkbox.getElementsByClassName("option");
 
         let options = [];
 
         for (let i=0; i < nodes.length; i++) {
-            if (nodes[i].childNodes.length == 2)
-            {
-                let _select = nodes[i].getElementsByTagName("select")[0].value;
-                options.push([_select, false]);
+            let _select = nodes[i].getElementsByTagName("select")[0].value;
+
+            if (nodes[i].childNodes.length == 2) {
+                options.push([_select, false, false]);
             }
-            else if (nodes[i].childNodes.length == 3)
-            {
-                let _select = nodes[i].getElementsByTagName("select")[0].value;
-                let _input = nodes[i].getElementsByTagName("input")[0].value;
-                options.push([_select, _input]);
+            else if (need_value.includes(_select)) {
+                let _input = nodes[i].getElementsByClassName("value")[0].value;
+
+                options.push([_select, _input, false]);
             }
+            else if (need_three_value.includes(_select)) {
+                let _input = nodes[i].getElementsByClassName("value")[0].value;
+                let _input2 = nodes[i].getElementsByClassName("value2")[0].value;
+
+                options.push([_select, _input, _input2]);
+            }
+
         }
 
         return options;
@@ -130,12 +163,6 @@
 
             return false;
         }
-    }
-
-    // sleep 함수
-    function sleep(ms) {
-      const wakeUpTime = Date.now() + ms
-      while (Date.now() < wakeUpTime) {}
     }
 
 
@@ -178,6 +205,7 @@
                 newData.append('text_file', data);
                 newData.append('option', options[i][0]);
                 newData.append('value', options[i][1]);
+                newData.append('value2', options[i][2]);
 
                 send_option(newData)
             }
@@ -221,6 +249,7 @@
         formData.append('text_file', text_file);
         formData.append('option', options[i][0]);
         formData.append('value', options[i][1]);
+        formData.append('value2', options[i][2]);
 
         send_option(formData);
     }

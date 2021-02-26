@@ -52,7 +52,7 @@ def handle_requests_by_batch():
             for requests in request_batch:
 
                 try:
-                    requests["output"] = transform(requests['input'][0], requests['input'][1], requests['input'][2])
+                    requests["output"] = transform(requests['input'][0], requests['input'][1], requests['input'][2], requests['input'][3])
                 except Exception as e:
                     requests["output"] = e
 
@@ -134,12 +134,22 @@ def special_remover(text, special):
 
 
 ##
-# special character remover
-def special_replacer(text, specials):
+# special character replacer
+def special_replacer(text, specials, new):
     text: str
 
     for special in specials:
-        text = text.replace(special[0], special[1])
+        text = text.replace(special, new)
+
+    return text
+
+
+##
+# word replacer
+def word_replacer(text, word, new):
+    text: str
+
+    text = text.replace(word, new)
 
     return text
 
@@ -147,6 +157,8 @@ def special_replacer(text, specials):
 ##
 # Lemmatizer
 # ex) bats -> bat, doing -> do
+# But... got error...
+# => Hello, I got things -> Hello , I get thing
 def lemmatizer(text):
     doc = nlp(text)
     tokens = []
@@ -165,7 +177,7 @@ def lemmatizer(text):
 # ex) Hello,    guy -> Hello, guy
 def space_normalizer(text):
     result = " ".join(text.split())
-    print(result)
+
     if result == "":
         return result
 
@@ -197,7 +209,7 @@ def comma_normalizer(text, stops):
 
 
 ##
-# number to word
+# Change number to same text.
 # ex) He is 3 years-old. -> He is three years-old.
 def number_changer(text):
     result = re.sub('\d+', lambda n: num2words(int(n.group())), text)
@@ -205,7 +217,16 @@ def number_changer(text):
     return result
 
 
-def transform(file, option, value):
+##
+# number to word
+# ex) if number == 1) He is 3 years-old. -> He is 1 years-old.
+def number_normalizer(text, number):
+    result = re.sub('\d+', number, text)
+
+    return result
+
+
+def transform(file, option, value=False, value2=False):
     # 파일 저장
     filename = secure_filename(file.filename)
     input_path = os.path.join(UPLOAD_FOLDER, filename)
@@ -239,7 +260,7 @@ def transform(file, option, value):
                     elif option == "special_remover":
                         line = special_remover(line, value)
                     elif option == "special_replacer":
-                        line = special_replacer(line, value)
+                        line = special_replacer(line, value, value2)
                     elif option == "lemmatizer":
                         line = lemmatizer(line)
                     elif option == "space_normalizer":
@@ -250,6 +271,10 @@ def transform(file, option, value):
                         line = comma_normalizer(line, value)
                     elif option == "number_changer":
                         line = number_changer(line)
+                    elif option == "number_normalizer":
+                        line = number_normalizer(line, value)
+                    elif option == "word_replacer":
+                        line = word_replacer(line, value, value2)
 
                     r.write(line)
 
@@ -287,10 +312,12 @@ def processor():
         text_file = request.files['text_file']
         option = request.form['option']
         value = request.form['value']
+        value2 = request.form['value2']
 
         args.append(text_file)
         args.append(option)
         args.append(value)
+        args.append(value2)
 
     except Exception as e:
         return jsonify({'error': e}), 400
