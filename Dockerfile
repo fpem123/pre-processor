@@ -1,6 +1,7 @@
-FROM python
+FROM pytorch/pytorch:1.6.0-cuda10.1-cudnn7-runtime
 
-WORKDIR /dir
+RUN apt-get update
+RUN apt-get install -y --no-install-recommends python3.6 python3.6-dev python3-pip python3-setuptools python3-wheel gcc
 
 RUN pip install --upgrade pip
 RUN pip install num2words && \
@@ -8,10 +9,6 @@ RUN pip install num2words && \
     pip install Unidecode && \
     pip install flask && \
     pip install contractions
-
-FROM pytorch/pytorch:1.6.0-cuda10.1-cudnn7-runtime
-
-COPY --from=0 /dir .
 
 # spacy module and spacy model download
 RUN pip install -U pip setuptools wheel
