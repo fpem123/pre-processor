@@ -8,7 +8,8 @@ RUN pip install --upgrade pip
 RUN pip install num2words && \
     pip install waitress && \
     pip install Unidecode && \
-    pip install flask
+    pip install flask && \
+    pip install pyahocorasick
 RUN pip install contractions
 
 # spacy module and spacy model download
