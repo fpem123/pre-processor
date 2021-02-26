@@ -5,11 +5,11 @@ RUN apt-get update && \
     apt-get install -y apt-utils wget
 
 RUN pip install --upgrade pip
-RUN pip install num2words \
-    waitress \
-    Unidecode \
-    contractions \
-    flask
+RUN pip install num2words
+RUN pip install waitress
+RUN pip install Unidecode
+RUN pip install contractions
+RUN pip install flask
 
 # spacy module and spacy model download
 RUN pip install -U pip setuptools wheel
