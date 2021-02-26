@@ -10,7 +10,7 @@ import contractions
 import unidecode
 import spacy
 from num2words import num2words
-import torch.cuda    # GPU check
+import torch    # GPU check
 
 # internal module
 from werkzeug.utils import secure_filename
