@@ -41,6 +41,7 @@ if torch.cuda.is_available():   # gpu check
 
 
 nlp = spacy.load('en_core_web_sm')  # spacy model load
+nlp.max_length = 5000000    # spacy max size up
 
 if not os.path.isdir(UPLOAD_FOLDER):
     os.mkdir(UPLOAD_FOLDER)
