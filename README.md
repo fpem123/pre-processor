@@ -38,6 +38,8 @@ This project pre-processor web server for NLP.
 
     lemmatizer: Turns all words into basic form. (is -> be, bats -> bat). No additional value required.
 
+    html_tag_remover: Remove the html tag.
+
     number_changer: Turn numbers into words. No additional value required.
 
     number_normalizer: Replace the number with another one you entered. Need additional value.
