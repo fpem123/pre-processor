@@ -1,3 +1,4 @@
+# Dockerfile CPU
 FROM python
 
 RUN pip install --upgrade pip
