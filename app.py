@@ -10,6 +10,7 @@ import contractions
 import unidecode
 import spacy
 from num2words import num2words
+from bs4 import BeautifulSoup
 import torch    # GPU check
 
 # internal module
@@ -33,10 +34,10 @@ RESULT_FOLDER = './data/result'
 
 device = 'cuda' if torch.cuda.is_available() else 'cpu'     # gpu check
 
-print(device)
-
 if device == 'cuda':
     spacy.prefer_gpu()      # spacy run GPU
+
+print(device)
 
 nlp = spacy.load('en_core_web_sm')  # spacy model load
 
@@ -234,6 +235,15 @@ def number_normalizer(text, number):
     return result
 
 
+##
+# html tag remove
+def html_tag_remover(text):
+    soup = BeautifulSoup(text, "html.parser")
+    stripped_text = soup.get_text(separator=" ")
+
+    return stripped_text
+
+
 def transform(file, option, value=False, value2=False):
     # 파일 저장
     filename = secure_filename(file.filename)
@@ -283,6 +293,8 @@ def transform(file, option, value=False, value2=False):
                         line = number_normalizer(line, value)
                     elif option == "word_replacer":
                         line = word_replacer(line, value, value2)
+                    elif option == "html_tag_remover":
+                        line = html_tag_remover(line)
 
                     r.write(line)
 
