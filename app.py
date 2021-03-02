@@ -2,10 +2,11 @@
     Name: main.py
     Writer: Hoseop Lee, Ainizer
     Rule: Flask app
-    update: 21.02.24
+    update: 21.03.02
 '''
 # external module
 from flask import Flask, request, jsonify, render_template, send_file, Response
+from werkzeug.datastructures import ImmutableOrderedMultiDict
 import contractions
 import unidecode
 import spacy
@@ -22,6 +23,8 @@ import os
 import io
 import re
 
+# 순서있는 걸로 변
+Flask.request_class.parameter_storage_class = ImmutableOrderedMultiDict
 
 app = Flask(__name__)
 
@@ -59,7 +62,7 @@ def handle_requests_by_batch():
             for requests in request_batch:
 
                 try:
-                    requests["output"] = transform(requests['input'][0], requests['input'][1], requests['input'][2], requests['input'][3])
+                    requests["output"] = transform(requests['input'][0], requests['input'][1])
                 except Exception as e:
                     requests["output"] = e
 
@@ -242,7 +245,7 @@ def html_tag_remover(text):
     return result
 
 
-def transform(file, option, value=False, value2=False):
+def transform(file, options):
     # 파일 저장
     filename = secure_filename(file.filename)
     input_path = os.path.join(UPLOAD_FOLDER, filename)
@@ -250,7 +253,6 @@ def transform(file, option, value=False, value2=False):
 
     result_path = os.path.join(RESULT_FOLDER, filename)
 
-    print(option)
 
     try:
         with open(input_path, 'r', encoding='utf-8-sig') as f:
@@ -259,40 +261,46 @@ def transform(file, option, value=False, value2=False):
             with open(result_path, 'w', encoding='utf-8') as r:
 
                 for line in lines:
-                    if option == "to_capitalize":
-                        line = to_capitalize(line)
-                    elif option == "to_lower":
-                        line = to_lower(line)
-                    elif option == "accent":
-                        line = accent(line)
-                    elif option == "expander":
-                        line = expander(line)
-                    elif option == "short_line_remover":
-                        line = short_line_remover(line, value)
-                    elif option == "short_word_remover":
-                        line = short_word_remover(line, value)
-                    elif option == "emoji_remover":
-                        line = emoji_remover(line)
-                    elif option == "special_remover":
-                        line = special_remover(line, value)
-                    elif option == "special_replacer":
-                        line = special_replacer(line, value, value2)
-                    elif option == "lemmatizer":
-                        line = lemmatizer(line)
-                    elif option == "space_normalizer":
-                        line = space_normalizer(line)
-                    elif option == "full_stop_normalizer":
-                        line = full_stop_normalizer(line, value)
-                    elif option == "comma_normalizer":
-                        line = comma_normalizer(line, value)
-                    elif option == "number_changer":
-                        line = number_changer(line)
-                    elif option == "number_normalizer":
-                        line = number_normalizer(line, value)
-                    elif option == "word_replacer":
-                        line = word_replacer(line, value, value2)
-                    elif option == "html_tag_remover":
-                        line = html_tag_remover(line)
+
+                    for option in options:
+                        option_name = option[0]
+                        value = option[1]
+                        value2 = option[2]
+
+                        if option_name == "to_capitalize":
+                            line = to_capitalize(line)
+                        elif option_name == "to_lower":
+                            line = to_lower(line)
+                        elif option_name == "accent":
+                            line = accent(line)
+                        elif option_name == "expander":
+                            line = expander(line)
+                        elif option_name == "short_line_remover":
+                            line = short_line_remover(line, value)
+                        elif option_name == "short_word_remover":
+                            line = short_word_remover(line, value)
+                        elif option_name == "emoji_remover":
+                            line = emoji_remover(line)
+                        elif option_name == "special_remover":
+                            line = special_remover(line, value)
+                        elif option_name == "special_replacer":
+                            line = special_replacer(line, value, value2)
+                        elif option_name == "lemmatizer":
+                            line = lemmatizer(line)
+                        elif option_name == "space_normalizer":
+                            line = space_normalizer(line)
+                        elif option_name == "full_stop_normalizer":
+                            line = full_stop_normalizer(line, value)
+                        elif option_name == "comma_normalizer":
+                            line = comma_normalizer(line, value)
+                        elif option_name == "number_changer":
+                            line = number_changer(line)
+                        elif option_name == "number_normalizer":
+                            line = number_normalizer(line, value)
+                        elif option_name == "word_replacer":
+                            line = word_replacer(line, value, value2)
+                        elif option_name == "html_tag_remover":
+                            line = html_tag_remover(line)
 
                     r.write(line)
 
@@ -328,14 +336,15 @@ def processor():
         args = []
 
         text_file = request.files['text_file']
-        option = request.form['option']
-        value = request.form['value'] if 'value' in request.form else False
-        value2 = request.form['value2'] if 'value2' in request.form else False
+
+        option_names = request.form.getlist('option')
+        values = request.form.getlist('value')
+        values2 = request.form.getlist('value2')
+
+        options = list(zip(option_names, values, values2))
 
         args.append(text_file)
-        args.append(option)
-        args.append(value)
-        args.append(value2)
+        args.append(options)
 
     except Exception as e:
         return jsonify({'error': e}), 400

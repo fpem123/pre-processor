@@ -166,57 +166,6 @@
     }
 
 
-    // 옵션 리스트를 연속적으로 보내는 자기호출 함수
-    function send_option(formData) {
-        // send request
-        result = fetch (url, { method: 'POST', body: formData, })
-        .then(response => {
-            if (response.status === 200) {
-                return response.blob();
-            } else {
-                console.log(response);
-                clearInterval(timer);
-                flag = false;
-            }
-        }).catch(err => {
-            clearInterval(timer);
-            flag = false;
-            document.getElementById('warning').innerText = err;
-        }).then(data => {
-
-            if (i == options.length - 1) {
-                let result_url = window.URL.createObjectURL(data);
-                let dl_btn = document.getElementById('download_btn');
-                let a = document.createElement('a');
-                a.href = result_url;
-                a.download = `result.txt`;
-                a.innerHTML = `Result Download<br>`;
-
-                dl_btn.appendChild(a);
-
-                clearInterval(timer);
-                time_obj.innerText = 'Done!';
-                flag = false;
-            }
-            else {
-                i += 1;
-                const newData = new FormData();
-
-                newData.append('text_file', data);
-                newData.append('option', options[i][0]);
-                newData.append('value', options[i][1]);
-                newData.append('value2', options[i][2]);
-
-                send_option(newData)
-            }
-        }).catch(err => {
-            clearInterval(timer);
-            flag = false;
-            document.getElementById('warning').innerText = err;
-        });
-    }
-
-
     // 전처리 리퀘스
     function send_req() {
         if (double_submit_check()){
@@ -242,17 +191,55 @@
 
         options = get_options();
         options_length = options.length;
-        i = 0
 
         const formData = new FormData();
 
         formData.append('text_file', text_file);
-        formData.append('option', options[i][0]);
-        formData.append('value', options[i][1]);
-        formData.append('value2', options[i][2]);
 
-        send_option(formData);
+        console.log(options)
+        console.log(options_length)
+
+        for (let i = 0; i < options_length; i++) {
+            formData.append('option', options[i][0]);
+            formData.append('value', options[i][1]);
+            formData.append('value2', options[i][2]);
+        }
+
+        // send request
+        result = fetch (url, { method: 'POST', body: formData, })
+        .then(response => {
+            if (response.status === 200) {
+                return response.blob();
+            } else {
+                console.log(response);
+                clearInterval(timer);
+                flag = false;
+            }
+        }).catch(err => {
+            clearInterval(timer);
+            flag = false;
+            document.getElementById('warning').innerText = err;
+        }).then(data => {
+            let result_url = window.URL.createObjectURL(data);
+            let dl_btn = document.getElementById('download_btn');
+            let a = document.createElement('a');
+            a.href = result_url;
+            a.download = `result.txt`;
+            a.innerHTML = `Result Download<br>`;
+
+            dl_btn.appendChild(a);
+
+            clearInterval(timer);
+            time_obj.innerText = 'Done!';
+            flag = false;
+        }).catch(err => {
+            clearInterval(timer);
+            flag = false;
+            document.getElementById('warning').innerText = err;
+        });
     }
+
+
 
 
 </script>
