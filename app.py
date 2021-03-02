@@ -235,10 +235,10 @@ def number_normalizer(text, number):
 ##
 # html tag remove
 def html_tag_remover(text):
-    soup = BeautifulSoup(text, "html.parser")
-    stripped_text = soup.get_text(separator=" ")
+    cleaner = re.compile('<.*?>|&([a-z0-9]+|#[0-9]{1,6}|#x[0-9a-f]{1,6});')
+    result = re.sub(cleaner, '', text)
 
-    return stripped_text
+    return result
 
 
 def transform(file, option, value=False, value2=False):
