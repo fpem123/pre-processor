@@ -11,7 +11,7 @@ import unidecode
 import spacy
 from num2words import num2words
 from bs4 import BeautifulSoup
-import torch    # GPU check
+import torch.cuda    # GPU check
 
 # internal module
 from werkzeug.utils import secure_filename
@@ -32,12 +32,9 @@ CHECK_INTERVAL = 0.1
 UPLOAD_FOLDER = './data/upload'
 RESULT_FOLDER = './data/result'
 
-device = 'cuda' if torch.cuda.is_available() else 'cpu'     # gpu check
-
-if device == 'cuda':
+if torch.cuda.is_available():   # gpu check
     spacy.prefer_gpu()      # spacy run GPU
 
-print(device)
 
 nlp = spacy.load('en_core_web_sm')  # spacy model load
 

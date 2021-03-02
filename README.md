@@ -71,110 +71,11 @@ This project pre-processor web server for NLP.
 
 ## * With CLI *
 
-### Input example
+### Input & Output example
 
 
 Sample data download: [GitHub](https://github.com/fpem123/pre-processor/blob/master/data/test.txt)
 
-
-* space_normalizer
-
-
-    curl -X POST "https://master-pre-processor-fpem123.endpoint.ainize.ai/dpp" -H "accept: text/plain" -H "Content-Type: multipart/form-data" -F "option=space_normalizer" -F "text_file=@sample.txt;type=text/plain"
-
-
-* to_capitalize 
-
-
-    curl -X POST "https://master-pre-processor-fpem123.endpoint.ainize.ai/dpp" -H "accept: text/plain" -H "Content-Type: multipart/form-data" -F "option=to_capitalize" -F "text_file=@sample.txt;type=text/plain"
-
-
-* to_lower
-  
-
-    curl -X POST "https://master-pre-processor-fpem123.endpoint.ainize.ai/dpp" -H "accept: text/plain" -H "Content-Type: multipart/form-data" -F "option=to_lower" -F "text_file=@sample.txt;type=text/plain"
-
-
-* accent
-  
-
-    curl -X POST "https://master-pre-processor-fpem123.endpoint.ainize.ai/dpp" -H "accept: text/plain" -H "Content-Type: multipart/form-data" -F "option=accent" -F "text_file=@sample.txt;type=text/plain"
-
-
-* expander
-  
-
-    curl -X POST "https://master-pre-processor-fpem123.endpoint.ainize.ai/dpp" -H "accept: text/plain" -H "Content-Type: multipart/form-data" -F "option=expander" -F "text_file=@sample.txt;type=text/plain"
-
-
-* emoji_remover
-  
-
-    curl -X POST "https://master-pre-processor-fpem123.endpoint.ainize.ai/dpp" -H "accept: text/plain" -H "Content-Type: multipart/form-data" -F "option=emoji_remover" -F "text_file=@sample.txt;type=text/plain"
-
-
-* lemmatizer
-  
-
-    curl -X POST "https://master-pre-processor-fpem123.endpoint.ainize.ai/dpp" -H "accept: text/plain" -H "Content-Type: multipart/form-data" -F "option=lemmatizer" -F "text_file=@sample.txt;type=text/plain"
-
-
-* number_changer
-  
-
-    curl -X POST "https://master-pre-processor-fpem123.endpoint.ainize.ai/dpp" -H "accept: text/plain" -H "Content-Type: multipart/form-data" -F "option=number_changer" -F "text_file=@sample.txt;type=text/plain"
-
-
-* number_normalizer
-  
-
-    curl -X POST "https://master-pre-processor-fpem123.endpoint.ainize.ai/dpp" -H "accept: text/plain" -H "Content-Type: multipart/form-data" -F "option=number_normalizer" -F "value=number" -F "text_file=@sample.txt;type=text/plain"
-
-
-* short_line_remover
-  
-
-    curl -X POST "https://master-pre-processor-fpem123.endpoint.ainize.ai/dpp" -H "accept: text/plain" -H "Content-Type: multipart/form-data" -F "option=short_line_remover" -F "value=3" -F "text_file=@sample.txt;type=text/plain"
-
-
-* short_word_remover
-  
-
-    curl -X POST "https://master-pre-processor-fpem123.endpoint.ainize.ai/dpp" -H "accept: text/plain" -H "Content-Type: multipart/form-data" -F "option=short_word_remover" -F "value=3" -F "text_file=@sample.txt;type=text/plain"
-
-
-* full_stop_normalizer
-  
-
-    curl -X POST "https://master-pre-processor-fpem123.endpoint.ainize.ai/dpp" -H "accept: text/plain" -H "Content-Type: multipart/form-data" -F "option=full_stop_normalizer" -F "value=;!?" -F "text_file=@sample.txt;type=text/plain"
-
-
-* comma_normalizer
-  
-
-    curl -X POST "https://master-pre-processor-fpem123.endpoint.ainize.ai/dpp" -H "accept: text/plain" -H "Content-Type: multipart/form-data" -F "option=comma_normalizer" -F "value=&;-@" -F "text_file=@sample.txt;type=text/plain"
-
-
-* special_remover
-  
-
-    curl -X POST "https://master-pre-processor-fpem123.endpoint.ainize.ai/dpp" -H "accept: text/plain" -H "Content-Type: multipart/form-data" -F "option=special_remover" -F "value=:;,-" -F "text_file=@sample.txt;type=text/plain"
-
-
-* special_replacer
-  
-
-    curl -X POST "https://master-pre-processor-fpem123.endpoint.ainize.ai/dpp" -H "accept: text/plain" -H "Content-Type: multipart/form-data" -F "option=special_replacer" -F "value=&@" -F "value2=and" -F "text_file=@sample.txt;type=text/plain"
-
-
-* word_replacer
-  
-
-    curl -X POST "https://master-pre-processor-fpem123.endpoint.ainize.ai/dpp" -H "accept: text/plain" -H "Content-Type: multipart/form-data" -F "option=word_replacer" -F "value=Orange" -F "value2=Apple" -F "text_file=@sample.txt;type=text/plain"
-
-
-
-### Output example
 
 Text_file
     
@@ -185,12 +86,29 @@ Text_file
     
     Oh.... you can't? sorry😢.
 
-* space_normalizer
-  
+
+space_normalizer
+
+* input
+
+
+    curl -X POST "https://master-pre-processor-fpem123.endpoint.ainize.ai/dpp" -H "accept: text/plain" -H "Content-Type: multipart/form-data" -F "option=space_normalizer" -F "text_file=@sample.txt;type=text/plain"
+
+* output
+
 
     Hello, guys my name is Kïm. And I have 10-blocks. I like Orange🍊🍊🍊 & Banana🍌 @ peach🍑🍑 that yummy...! Okay; I love it. I can eat 23 oranges at same time. Oh.... you can't? sorry😢.
 
-* to_capitalize
+
+to_capitalize 
+
+* input
+
+
+    curl -X POST "https://master-pre-processor-fpem123.endpoint.ainize.ai/dpp" -H "accept: text/plain" -H "Content-Type: multipart/form-data" -F "option=to_capitalize" -F "text_file=@sample.txt;type=text/plain"
+
+
+* output
 
 
     Hello, guys my name is kïm. and i have 10-blocks.
@@ -200,8 +118,16 @@ Text_file
     
     Oh.... you can't? sorry😢.
 
-* to_lower
-  
+
+to_lower
+
+* input
+
+
+    curl -X POST "https://master-pre-processor-fpem123.endpoint.ainize.ai/dpp" -H "accept: text/plain" -H "Content-Type: multipart/form-data" -F "option=to_lower" -F "text_file=@sample.txt;type=text/plain"
+
+* output
+
 
     hello, guys my name is kïm. and i have 10-blocks.
     i like         orange🍊🍊🍊 & banana🍌 @ peach🍑🍑 that yummy...!
@@ -210,8 +136,16 @@ Text_file
     
     oh.... you can't? sorry😢.
 
-* accent
+
+accent
   
+* input
+
+
+    curl -X POST "https://master-pre-processor-fpem123.endpoint.ainize.ai/dpp" -H "accept: text/plain" -H "Content-Type: multipart/form-data" -F "option=accent" -F "text_file=@sample.txt;type=text/plain"
+
+* output
+
 
     Hello, guys my name is Kim. And I have 10-blocks.
     I like         Orange & Banana @ peach that yummy...!
@@ -220,8 +154,16 @@ Text_file
     
     Oh.... you can't? sorry.
 
-* expander
-  
+
+expander
+
+* input
+
+
+    curl -X POST "https://master-pre-processor-fpem123.endpoint.ainize.ai/dpp" -H "accept: text/plain" -H "Content-Type: multipart/form-data" -F "option=expander" -F "text_file=@sample.txt;type=text/plain"
+
+* output
+
 
     Hello, guys my name is Kïm. And I have 10-blocks.
     I like         Orange🍊🍊🍊 & Banana🍌 @ peach🍑🍑 that yummy...!
@@ -230,8 +172,16 @@ Text_file
     
     Oh.... you can not? sorry😢.
 
-* emoji_remover
-  
+
+emoji_remover
+
+* input
+
+
+    curl -X POST "https://master-pre-processor-fpem123.endpoint.ainize.ai/dpp" -H "accept: text/plain" -H "Content-Type: multipart/form-data" -F "option=emoji_remover" -F "text_file=@sample.txt;type=text/plain"
+
+* output
+
 
     Hello, guys my name is Km. And I have 10-blocks.
     I like         Orange & Banana @ peach that yummy...!
@@ -240,8 +190,16 @@ Text_file
     
     Oh.... you can't? sorry.
 
-* lemmatizer
+
+lemmatizer
   
+* input
+
+
+    curl -X POST "https://master-pre-processor-fpem123.endpoint.ainize.ai/dpp" -H "accept: text/plain" -H "Content-Type: multipart/form-data" -F "option=lemmatizer" -F "text_file=@sample.txt;type=text/plain"
+
+* output
+
 
     hello , guy my name be Kïm . and I have 10 - block . 
     I like          Orange 🍊 🍊 🍊 & Banana 🍌 @ peach 🍑 🍑 that yummy ... ! 
@@ -250,8 +208,16 @@ Text_file
     
     oh .... you ca n't ? sorry 😢 .
 
-* number_changer
+
+number_changer
   
+* input
+
+
+    curl -X POST "https://master-pre-processor-fpem123.endpoint.ainize.ai/dpp" -H "accept: text/plain" -H "Content-Type: multipart/form-data" -F "option=number_changer" -F "text_file=@sample.txt;type=text/plain"
+
+* output
+
 
     Hello, guys my name is Kïm. And I have ten-blocks.
     I like         Orange🍊🍊🍊 & Banana🍌 @ peach🍑🍑 that yummy...!
@@ -260,7 +226,15 @@ Text_file
     
     Oh.... you can't? sorry😢.
 
-* number_normalizer
+
+number_normalizer
+
+* input
+
+
+    curl -X POST "https://master-pre-processor-fpem123.endpoint.ainize.ai/dpp" -H "accept: text/plain" -H "Content-Type: multipart/form-data" -F "option=number_normalizer" -F "value=number" -F "text_file=@sample.txt;type=text/plain"
+
+* output
   
 
     Hello, guys my name is Kïm. And I have number-blocks.
@@ -270,16 +244,32 @@ Text_file
     
     Oh.... you can't? sorry😢.
 
-* short_line_remover
-  
+
+short_line_remover
+
+* input
+
+
+    curl -X POST "https://master-pre-processor-fpem123.endpoint.ainize.ai/dpp" -H "accept: text/plain" -H "Content-Type: multipart/form-data" -F "option=short_line_remover" -F "value=3" -F "text_file=@sample.txt;type=text/plain"
+
+* output
+
 
     Hello, guys my name is Kïm. And I have 10-blocks.
     I like         Orange🍊🍊🍊 & Banana🍌 @ peach🍑🍑 that yummy...!
     Okay; I love it. I can eat 23 oranges at same time.
     Oh.... you can't? sorry😢.
 
-* short_word_remover
-  
+
+short_word_remover
+
+* input
+
+
+    curl -X POST "https://master-pre-processor-fpem123.endpoint.ainize.ai/dpp" -H "accept: text/plain" -H "Content-Type: multipart/form-data" -F "option=short_word_remover" -F "value=3" -F "text_file=@sample.txt;type=text/plain"
+
+* output
+
 
     Hello, guys name have-blocks.
      like         Orange🍊🍊🍊 & Banana🍌 @ peach🍑🍑 that yummy...!
@@ -288,8 +278,17 @@ Text_file
     
     ? sorry😢.
 
-* full_stop_normalizer
-  
+
+full_stop_normalizer
+
+* input
+
+
+    curl -X POST "https://master-pre-processor-fpem123.endpoint.ainize.ai/dpp" -H "accept: text/plain" -H "Content-Type: multipart/form-data" -F "option=full_stop_normalizer" -F "value=;!?" -F "text_file=@sample.txt;type=text/plain"
+
+
+* output
+
 
     Hello, guys my name is Kïm. And I have 10-blocks.
     I like         Orange🍊🍊🍊 & Banana🍌 @ peach🍑🍑 that yummy....
@@ -298,7 +297,15 @@ Text_file
     
     Oh.... you can't. sorry😢.
 
-* comma_normalizer
+
+comma_normalizer
+
+* input
+
+
+    curl -X POST "https://master-pre-processor-fpem123.endpoint.ainize.ai/dpp" -H "accept: text/plain" -H "Content-Type: multipart/form-data" -F "option=comma_normalizer" -F "value=&;-@" -F "text_file=@sample.txt;type=text/plain"
+
+* output
 
 
     Hello, guys my name is Kïm. And I have 10-blocks.
@@ -308,7 +315,15 @@ Text_file
     
     Oh.... you can't, sorry😢.
 
-* special_remover
+
+special_remover
+
+* input
+
+
+    curl -X POST "https://master-pre-processor-fpem123.endpoint.ainize.ai/dpp" -H "accept: text/plain" -H "Content-Type: multipart/form-data" -F "option=special_remover" -F "value=:;,-" -F "text_file=@sample.txt;type=text/plain"
+
+* output
 
 
     Hello  guys my name is Kïm. And I have 10 blocks.
@@ -318,7 +333,15 @@ Text_file
     
     Oh.... you can't? sorry😢.
 
-* special_replacer 
+
+special_replacer
+
+* input
+
+
+    curl -X POST "https://master-pre-processor-fpem123.endpoint.ainize.ai/dpp" -H "accept: text/plain" -H "Content-Type: multipart/form-data" -F "option=special_replacer" -F "value=&@" -F "value2=and" -F "text_file=@sample.txt;type=text/plain"
+
+* output
 
 
     Hello, guys my name is Kïm. And I have 10-blocks.
@@ -328,7 +351,15 @@ Text_file
     
     Oh.... you can't? sorry😢.
 
-* word_replacer
+
+word_replacer
+
+* input
+
+
+    curl -X POST "https://master-pre-processor-fpem123.endpoint.ainize.ai/dpp" -H "accept: text/plain" -H "Content-Type: multipart/form-data" -F "option=word_replacer" -F "value=Orange" -F "value2=Apple" -F "text_file=@sample.txt;type=text/plain"
+
+* output
 
 
     Hello, guys my name is Kïm. And I have 10-blocks.
