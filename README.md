@@ -91,10 +91,10 @@ Text_file
 
 #### space_normalizer
 
-* input
+* input: option=space_normalizer, value=whatever, value2=whatever
 
 
-    curl -X POST "https://master-pre-processor-fpem123.endpoint.ainize.ai/dpp" -H "accept: text/plain" -H "Content-Type: multipart/form-data" -F "option=space_normalizer" -F "text_file=@sample.txt;type=text/plain"
+    curl -X POST "https://master-pre-processor-fpem123.endpoint.ainize.ai/dpp" -H "accept: text/plain" -H "Content-Type: multipart/form-data" -F "option=space_normalizer" -F "value=" -F "value2=" -F "text_file=@sample.txt;type=text/plain"
 
 * output
 
@@ -104,10 +104,10 @@ Text_file
 
 #### to_capitalize 
 
-* input
+* input: option=to_capitalize, value=whatever, value2=whatever
 
 
-    curl -X POST "https://master-pre-processor-fpem123.endpoint.ainize.ai/dpp" -H "accept: text/plain" -H "Content-Type: multipart/form-data" -F "option=to_capitalize" -F "text_file=@sample.txt;type=text/plain"
+    curl -X POST "https://master-pre-processor-fpem123.endpoint.ainize.ai/dpp" -H "accept: text/plain" -H "Content-Type: multipart/form-data" -F "option=to_capitalize" -F "value=" -F "value2=" -F "text_file=@sample.txt;type=text/plain"
 
 
 * output
@@ -123,10 +123,10 @@ Text_file
 
 #### to_lower
 
-* input
+* input: option=to_lower, value=whatever, value2=whatever
 
 
-    curl -X POST "https://master-pre-processor-fpem123.endpoint.ainize.ai/dpp" -H "accept: text/plain" -H "Content-Type: multipart/form-data" -F "option=to_lower" -F "text_file=@sample.txt;type=text/plain"
+    curl -X POST "https://master-pre-processor-fpem123.endpoint.ainize.ai/dpp" -H "accept: text/plain" -H "Content-Type: multipart/form-data" -F "option=to_lower" -F "value=" -F "value2=" -F "text_file=@sample.txt;type=text/plain"
 
 * output
 
@@ -141,10 +141,10 @@ Text_file
 
 #### accent
   
-* input
+* input: option=accent, value=whatever, value2=whatever
 
 
-    curl -X POST "https://master-pre-processor-fpem123.endpoint.ainize.ai/dpp" -H "accept: text/plain" -H "Content-Type: multipart/form-data" -F "option=accent" -F "text_file=@sample.txt;type=text/plain"
+    curl -X POST "https://master-pre-processor-fpem123.endpoint.ainize.ai/dpp" -H "accept: text/plain" -H "Content-Type: multipart/form-data" -F "option=accent" -F "value=" -F "value2=" -F "text_file=@sample.txt;type=text/plain"
 
 * output
 
@@ -159,10 +159,10 @@ Text_file
 
 #### expander
 
-* input
+* input: option=expander, value=whatever, value2=whatever
 
 
-    curl -X POST "https://master-pre-processor-fpem123.endpoint.ainize.ai/dpp" -H "accept: text/plain" -H "Content-Type: multipart/form-data" -F "option=expander" -F "text_file=@sample.txt;type=text/plain"
+    curl -X POST "https://master-pre-processor-fpem123.endpoint.ainize.ai/dpp" -H "accept: text/plain" -H "Content-Type: multipart/form-data" -F "option=expander" -F "value=" -F "value2=" -F "text_file=@sample.txt;type=text/plain"
 
 * output
 
@@ -177,10 +177,10 @@ Text_file
 
 #### emoji_remover
 
-* input
+* input: option=emoji_remover, value=whatever, value2=whatever
 
 
-    curl -X POST "https://master-pre-processor-fpem123.endpoint.ainize.ai/dpp" -H "accept: text/plain" -H "Content-Type: multipart/form-data" -F "option=emoji_remover" -F "text_file=@sample.txt;type=text/plain"
+    curl -X POST "https://master-pre-processor-fpem123.endpoint.ainize.ai/dpp" -H "accept: text/plain" -H "Content-Type: multipart/form-data" -F "option=emoji_remover" -F "value=" -F "value2=" -F "text_file=@sample.txt;type=text/plain"
 
 * output
 
@@ -195,10 +195,10 @@ Text_file
 
 #### lemmatizer
   
-* input
+* input: option=lemmatizer, value=whatever, value2=whatever
 
 
-    curl -X POST "https://master-pre-processor-fpem123.endpoint.ainize.ai/dpp" -H "accept: text/plain" -H "Content-Type: multipart/form-data" -F "option=lemmatizer" -F "text_file=@sample.txt;type=text/plain"
+    curl -X POST "https://master-pre-processor-fpem123.endpoint.ainize.ai/dpp" -H "accept: text/plain" -H "Content-Type: multipart/form-data" -F "option=lemmatizer" -F "value=" -F "value2=" -F "text_file=@sample.txt;type=text/plain"
 
 * output
 
@@ -213,10 +213,10 @@ Text_file
 
 #### number_changer
   
-* input
+* input: option=number_changer, value=whatever, value2=whatever
 
 
-    curl -X POST "https://master-pre-processor-fpem123.endpoint.ainize.ai/dpp" -H "accept: text/plain" -H "Content-Type: multipart/form-data" -F "option=number_changer" -F "text_file=@sample.txt;type=text/plain"
+    curl -X POST "https://master-pre-processor-fpem123.endpoint.ainize.ai/dpp" -H "accept: text/plain" -H "Content-Type: multipart/form-data" -F "option=number_changer" -F "value=" -F "value2=" -F "text_file=@sample.txt;type=text/plain"
 
 * output
 
@@ -231,10 +231,10 @@ Text_file
 
 #### number_normalizer
 
-* input
+* input: option=number_normalizer, value=number, value2=whatever
 
 
-    curl -X POST "https://master-pre-processor-fpem123.endpoint.ainize.ai/dpp" -H "accept: text/plain" -H "Content-Type: multipart/form-data" -F "option=number_normalizer" -F "value=number" -F "text_file=@sample.txt;type=text/plain"
+    curl -X POST "https://master-pre-processor-fpem123.endpoint.ainize.ai/dpp" -H "accept: text/plain" -H "Content-Type: multipart/form-data" -F "option=number_normalizer" -F "value=number" -F "value2=" -F "text_file=@sample.txt;type=text/plain"
 
 * output
   
@@ -249,10 +249,10 @@ Text_file
 
 #### short_line_remover
 
-* input
+* input: option=short_line_remover, value=3, value2=whatever
 
 
-    curl -X POST "https://master-pre-processor-fpem123.endpoint.ainize.ai/dpp" -H "accept: text/plain" -H "Content-Type: multipart/form-data" -F "option=short_line_remover" -F "value=3" -F "text_file=@sample.txt;type=text/plain"
+    curl -X POST "https://master-pre-processor-fpem123.endpoint.ainize.ai/dpp" -H "accept: text/plain" -H "Content-Type: multipart/form-data" -F "option=short_line_remover" -F "value=3" -F "value=" -F "text_file=@sample.txt;type=text/plain"
 
 * output
 
@@ -265,10 +265,10 @@ Text_file
 
 #### short_word_remover
 
-* input
+* input: option=short_word_remover, value=3, value2=whatever
 
 
-    curl -X POST "https://master-pre-processor-fpem123.endpoint.ainize.ai/dpp" -H "accept: text/plain" -H "Content-Type: multipart/form-data" -F "option=short_word_remover" -F "value=3" -F "text_file=@sample.txt;type=text/plain"
+    curl -X POST "https://master-pre-processor-fpem123.endpoint.ainize.ai/dpp" -H "accept: text/plain" -H "Content-Type: multipart/form-data" -F "option=short_word_remover" -F "value=3" -F "value2=" -F "text_file=@sample.txt;type=text/plain"
 
 * output
 
@@ -283,10 +283,10 @@ Text_file
 
 #### full_stop_normalizer
 
-* input
+* input: option=full_stop_normalizer, value=;!?, value2=whatever
 
 
-    curl -X POST "https://master-pre-processor-fpem123.endpoint.ainize.ai/dpp" -H "accept: text/plain" -H "Content-Type: multipart/form-data" -F "option=full_stop_normalizer" -F "value=;!?" -F "text_file=@sample.txt;type=text/plain"
+    curl -X POST "https://master-pre-processor-fpem123.endpoint.ainize.ai/dpp" -H "accept: text/plain" -H "Content-Type: multipart/form-data" -F "option=full_stop_normalizer" -F "value=;!?" -F "value2=" -F "text_file=@sample.txt;type=text/plain"
 
 
 * output
@@ -302,10 +302,10 @@ Text_file
 
 #### comma_normalizer
 
-* input
+* input: option=comma_normalizer, value=&;-@, value2=whatever
 
 
-    curl -X POST "https://master-pre-processor-fpem123.endpoint.ainize.ai/dpp" -H "accept: text/plain" -H "Content-Type: multipart/form-data" -F "option=comma_normalizer" -F "value=&;-@" -F "text_file=@sample.txt;type=text/plain"
+    curl -X POST "https://master-pre-processor-fpem123.endpoint.ainize.ai/dpp" -H "accept: text/plain" -H "Content-Type: multipart/form-data" -F "option=comma_normalizer" -F "value=&;-@" -F "value2=" -F "text_file=@sample.txt;type=text/plain"
 
 * output
 
@@ -320,10 +320,10 @@ Text_file
 
 #### special_remover
 
-* input
+* input: option=special_remover, value=:;,-, value2=whatever
 
 
-    curl -X POST "https://master-pre-processor-fpem123.endpoint.ainize.ai/dpp" -H "accept: text/plain" -H "Content-Type: multipart/form-data" -F "option=special_remover" -F "value=:;,-" -F "text_file=@sample.txt;type=text/plain"
+    curl -X POST "https://master-pre-processor-fpem123.endpoint.ainize.ai/dpp" -H "accept: text/plain" -H "Content-Type: multipart/form-data" -F "option=special_remover" -F "value=:;,-" -F "value2=" -F "text_file=@sample.txt;type=text/plain"
 
 * output
 
@@ -338,7 +338,7 @@ Text_file
 
 #### special_replacer
 
-* input
+* input: option=special_replacer, value=&@, value2=and
 
 
     curl -X POST "https://master-pre-processor-fpem123.endpoint.ainize.ai/dpp" -H "accept: text/plain" -H "Content-Type: multipart/form-data" -F "option=special_replacer" -F "value=&@" -F "value2=and" -F "text_file=@sample.txt;type=text/plain"
@@ -356,7 +356,7 @@ Text_file
 
 #### word_replacer
 
-* input
+* input: option=word_replacer, value=Orange, value2=Apple
 
 
 
