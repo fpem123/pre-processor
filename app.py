@@ -11,7 +11,7 @@ import unidecode
 import spacy
 from num2words import num2words
 from bs4 import BeautifulSoup
-import torch.cuda    # GPU check
+#import torch    # GPU check
 
 # internal module
 from werkzeug.utils import secure_filename
