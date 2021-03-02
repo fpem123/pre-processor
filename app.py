@@ -73,7 +73,9 @@ handler = Thread(target=handle_requests_by_batch).start()
 ##
 # String to capitalize
 def to_capitalize(text):
-    result = text.capitalize()
+    text = list(map(lambda x: x.capitalize(), text.split(". ")))
+
+    result = ". ".join(text)
 
     return result
 
