@@ -12,7 +12,7 @@ import unidecode
 import spacy
 from num2words import num2words
 from bs4 import BeautifulSoup
-#import torch    # GPU check
+import torch    # GPU check
 
 # internal module
 from werkzeug.utils import secure_filename
@@ -35,10 +35,10 @@ CHECK_INTERVAL = 0.1
 UPLOAD_FOLDER = './data/upload'
 RESULT_FOLDER = './data/result'
 
-'''
+
 if torch.cuda.is_available():   # gpu check
     spacy.prefer_gpu()      # spacy run GPU
-'''
+
 
 nlp = spacy.load('en_core_web_sm')  # spacy model load
 
