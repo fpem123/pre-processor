@@ -6,7 +6,9 @@ RUN pip install num2words \
     waitress \
     Unidecode \
     contractions \
-    flask
+    flask \
+    beautifulsoup4 \
+    torch
 
 # spacy module and spacy model download
 RUN pip install -U pip setuptools wheel
