@@ -87,7 +87,7 @@ Text_file
     Oh.... you can't? sorry😢.
 
 
-space_normalizer
+#### space_normalizer
 
 * input
 
@@ -100,7 +100,7 @@ space_normalizer
     Hello, guys my name is Kïm. And I have 10-blocks. I like Orange🍊🍊🍊 & Banana🍌 @ peach🍑🍑 that yummy...! Okay; I love it. I can eat 23 oranges at same time. Oh.... you can't? sorry😢.
 
 
-to_capitalize 
+#### to_capitalize 
 
 * input
 
@@ -119,7 +119,7 @@ to_capitalize
     Oh.... you can't? sorry😢.
 
 
-to_lower
+#### to_lower
 
 * input
 
@@ -137,7 +137,7 @@ to_lower
     oh.... you can't? sorry😢.
 
 
-accent
+#### accent
   
 * input
 
@@ -155,7 +155,7 @@ accent
     Oh.... you can't? sorry.
 
 
-expander
+#### expander
 
 * input
 
@@ -173,7 +173,7 @@ expander
     Oh.... you can not? sorry😢.
 
 
-emoji_remover
+#### emoji_remover
 
 * input
 
@@ -191,7 +191,7 @@ emoji_remover
     Oh.... you can't? sorry.
 
 
-lemmatizer
+#### lemmatizer
   
 * input
 
@@ -209,7 +209,7 @@ lemmatizer
     oh .... you ca n't ? sorry 😢 .
 
 
-number_changer
+#### number_changer
   
 * input
 
@@ -227,7 +227,7 @@ number_changer
     Oh.... you can't? sorry😢.
 
 
-number_normalizer
+#### number_normalizer
 
 * input
 
@@ -245,7 +245,7 @@ number_normalizer
     Oh.... you can't? sorry😢.
 
 
-short_line_remover
+#### short_line_remover
 
 * input
 
@@ -261,7 +261,7 @@ short_line_remover
     Oh.... you can't? sorry😢.
 
 
-short_word_remover
+#### short_word_remover
 
 * input
 
@@ -279,7 +279,7 @@ short_word_remover
     ? sorry😢.
 
 
-full_stop_normalizer
+#### full_stop_normalizer
 
 * input
 
@@ -298,7 +298,7 @@ full_stop_normalizer
     Oh.... you can't. sorry😢.
 
 
-comma_normalizer
+#### comma_normalizer
 
 * input
 
@@ -316,7 +316,7 @@ comma_normalizer
     Oh.... you can't, sorry😢.
 
 
-special_remover
+#### special_remover
 
 * input
 
@@ -334,7 +334,7 @@ special_remover
     Oh.... you can't? sorry😢.
 
 
-special_replacer
+#### special_replacer
 
 * input
 
@@ -352,14 +352,17 @@ special_replacer
     Oh.... you can't? sorry😢.
 
 
-word_replacer
+#### word_replacer
 
 * input
 
 
+
     curl -X POST "https://master-pre-processor-fpem123.endpoint.ainize.ai/dpp" -H "accept: text/plain" -H "Content-Type: multipart/form-data" -F "option=word_replacer" -F "value=Orange" -F "value2=Apple" -F "text_file=@sample.txt;type=text/plain"
 
+
 * output
+
 
 
     Hello, guys my name is Kïm. And I have 10-blocks.
