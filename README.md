@@ -459,7 +459,7 @@ Sample data download: [GitHub](https://github.com/fpem123/pre-processor/blob/mas
 * input: option=special_replacer, value=&@, value2=and, option=html_tag_remover, value=whatever, value2=whatever, option=space_normalizer, value=whatever, value2=whatever
 
 
-    curl -X POST "https://master-pre-processor-fpem123.endpoint.ainize.ai/dpp" -H "accept: text/plain" -H "Content-Type: multipart/form-data" -F "option=special_replacer" -F "value=&@;" -F "value2=and" -F "option=html_tag_remover" -F "value=" -F "value2=" -F "option=space_normalizer" -F "value=" -F "value2=" -F "text_file=@sample.txt;type=text/plain
+    curl -X POST "https://master-pre-processor-fpem123.endpoint.ainize.ai/dpp" -H "accept: text/plain" -H "Content-Type: multipart/form-data" -F "option=special_replacer" -F "value=&@;" -F "value2=and" -F "option=html_tag_remover" -F "value=" -F "value2=" -F "option=space_normalizer" -F "value=" -F "value2=" -F "text_file=@sample.txt;type=text/plain"
 
     
 * output
