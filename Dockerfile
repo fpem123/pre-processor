@@ -9,7 +9,7 @@ RUN pip install num2words \
     contractions \
     flask \
     emoji \
-    torch==1.6.0+cpu torchvision==0.7.0+cpu -f https://download.pytorch.org/whl/torch_stable.html
+    torch
 
 # spacy module and spacy model download
 RUN pip install -U pip setuptools wheel
