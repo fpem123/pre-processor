@@ -11,8 +11,8 @@ import contractions
 import unidecode
 import spacy
 from num2words import num2words
-from bs4 import BeautifulSoup
 import torch    # GPU check
+import emoji
 
 # internal module
 from werkzeug.utils import secure_filename
@@ -23,7 +23,7 @@ import os
 import io
 import re
 
-# 순서있는 걸로 변
+# 순서있는 걸로 변경
 Flask.request_class.parameter_storage_class = ImmutableOrderedMultiDict
 
 app = Flask(__name__)
@@ -137,6 +137,14 @@ def emoji_remover(text):
 
 
 ##
+# emoji to text
+def emoji_to_text(text):
+    result = emoji.demojize(text, delimiters=("", ""))
+
+    return result
+
+
+##
 # special character remover
 def special_remover(text, special):
     special = '[' + special + ']'
@@ -224,7 +232,7 @@ def comma_normalizer(text, stops):
 ##
 # Change number to same text.
 # ex) He is 3 years-old. -> He is three years-old.
-def number_changer(text):
+def number_to_text(text):
     result = re.sub('\d+', lambda n: num2words(int(n.group())), text)
 
     return result
@@ -284,6 +292,8 @@ def transform(file, options):
                             line = short_word_remover(line, value)
                         elif option_name == "emoji_remover":
                             line = emoji_remover(line)
+                        elif option_name == "emoji_to_text":
+                            line = emoji_to_text(line)
                         elif option_name == "special_remover":
                             line = special_remover(line, value)
                         elif option_name == "special_replacer":
@@ -296,8 +306,8 @@ def transform(file, options):
                             line = full_stop_normalizer(line, value)
                         elif option_name == "comma_normalizer":
                             line = comma_normalizer(line, value)
-                        elif option_name == "number_changer":
-                            line = number_changer(line)
+                        elif option_name == "number_to_text":
+                            line = number_to_text(line)
                         elif option_name == "number_normalizer":
                             line = number_normalizer(line, value)
                         elif option_name == "word_replacer":

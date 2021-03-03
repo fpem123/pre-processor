@@ -10,6 +10,7 @@ RUN pip install num2words && \
     pip install Unidecode && \
     pip install flask && \
     pip install contractions && \
+    pip install emoji && \
     pip install torch==1.6.0+cu101 torchvision==0.7.0+cu101 -f https://download.pytorch.org/whl/torch_stable.html && \
     pip install -U pip setuptools wheel && \
     pip install -U spacy[cuda101]

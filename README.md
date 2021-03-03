@@ -36,11 +36,13 @@ This project pre-processor web server for NLP.
 
     emoji_remover: Remove emojis. No additional value required.
 
+    emoji_to_text: Change emojis to text. No additional value required.
+
     lemmatizer: Turns all words into basic form. (is -> be, bats -> bat). No additional value required.
 
     html_tag_remover: Remove the html tag.
 
-    number_changer: Turn numbers into words. No additional value required.
+    number_to_text: Turn numbers into words. No additional value required.
 
     number_normalizer: Replace the number with another one you entered. Need additional value.
 
@@ -211,12 +213,12 @@ Text_file
     oh .... you ca n't ? sorry 😢 .
 
 
-#### number_changer
+#### number_to_text
   
-* input: option=number_changer, value=whatever, value2=whatever
+* input: option=number_to_text, value=whatever, value2=whatever
 
 
-    curl -X POST "https://master-pre-processor-fpem123.endpoint.ainize.ai/dpp" -H "accept: text/plain" -H "Content-Type: multipart/form-data" -F "option=number_changer" -F "value=" -F "value2=" -F "text_file=@sample.txt;type=text/plain"
+    curl -X POST "https://master-pre-processor-fpem123.endpoint.ainize.ai/dpp" -H "accept: text/plain" -H "Content-Type: multipart/form-data" -F "option=number_to_text" -F "value=" -F "value2=" -F "text_file=@sample.txt;type=text/plain"
 
 * output
 
