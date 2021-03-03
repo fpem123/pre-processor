@@ -32,13 +32,13 @@ This project pre-processor web server for NLP.
 
     accent: Replace accented characters like ï with regular characters. No additional value required.
 
-    expander: Increases the abbreviation. (can't → can not). No additional value required.
+    expander: Increases the abbreviation(can't → can not). No additional value required.
 
     emoji_remover: Remove emojis. No additional value required.
 
     emoji_to_text: Change emojis to text. No additional value required.
 
-    lemmatizer: Turns all words into basic form(is -> be, bats -> bat). But, Very slow option. No additional value required.
+    lemmatizer: Turns all words into basic form(is -> be, bats -> bat). But, very slow option. No additional value required.
 
     html_tag_remover: Remove the html tag. No additional value required.
 
