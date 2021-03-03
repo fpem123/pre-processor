@@ -183,7 +183,7 @@ def word_replacer(text, word, new):
 def lemmatizer(text):
     doc = nlp(text)
 
-    lemmatized_sentence = " ".join([token.lemma_ for token in doc])
+    lemmatized_sentence = " ".join(token.lemma_ for token in doc)
 
     return lemmatized_sentence
 
