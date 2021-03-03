@@ -139,7 +139,7 @@ def emoji_remover(text):
 ##
 # emoji to text
 def emoji_to_text(text):
-    result = emoji.demojize(text, delimiters=("", ""))
+    result = emoji.demojize(text, delimiters=(" ", ""))
 
     return result
 
