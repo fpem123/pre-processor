@@ -1,25 +1,13 @@
-import re
-from num2words import num2words
 
-special = "!@#$%^&*()_"
-text = '#H$e%#ll@#o'
+import spacy
 
-special = '[' + special + ']'
+nlp = spacy.load('en_core_web_sm')  # spacy model load
 
-result = re.sub(special, "", text)
+text = """Hello guys, my name is hoseop
+and I am ready!\n
+I can do this all day"""
 
-print(result)
-
-number = re.compile('\d+')
-
-
-x = "23 is good, 24's 223, and 2.3 is "
-x = re.sub('\d+', lambda n: num2words(int(n.group())), x)
-
-print(x)
-
-x = "I'm banana"
-x = re.sub('\d+', lambda n: num2words(int(n.group())), x)
-
-print(x)
-
+doc = nlp(text)
+print(doc)
+lemmatized_sentence = " ".join(token.lemma_ for token in doc)
+print(lemmatized_sentence)

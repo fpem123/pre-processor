@@ -38,7 +38,7 @@ This project pre-processor web server for NLP.
 
     emoji_to_text: Change emojis to text. No additional value required.
 
-    lemmatizer: Turns all words into basic form. (is -> be, bats -> bat). No additional value required.
+    lemmatizer: Turns all words into basic form(is -> be, bats -> bat). But, Very slow option. No additional value required.
 
     html_tag_remover: Remove the html tag. No additional value required.
 
