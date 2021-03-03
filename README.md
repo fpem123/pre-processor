@@ -40,7 +40,7 @@ This project pre-processor web server for NLP.
 
     lemmatizer: Turns all words into basic form. (is -> be, bats -> bat). No additional value required.
 
-    html_tag_remover: Remove the html tag.
+    html_tag_remover: Remove the html tag. No additional value required.
 
     number_to_text: Turn numbers into words. No additional value required.
 
@@ -81,13 +81,15 @@ This project pre-processor web server for NLP.
 Sample data download: [GitHub](https://github.com/fpem123/pre-processor/blob/master/data/test.txt)
 
 
-Text_file
+#### Text_file
     
     Hello, guys my name is Kïm. And I have 10-blocks.
     I like         Orange🍊🍊🍊 & Banana🍌 @ peach🍑🍑 that yummy...!
+    <hr>
     
     Okay; I love it. I can eat 23 oranges at same time.
     
+    lol
     Oh.... you can't? sorry😢.
 
 
@@ -101,7 +103,7 @@ Text_file
 * output
 
 
-    Hello, guys my name is Kïm. And I have 10-blocks. I like Orange🍊🍊🍊 & Banana🍌 @ peach🍑🍑 that yummy...! Okay; I love it. I can eat 23 oranges at same time. Oh.... you can't? sorry😢.
+    Hello, guys my name is Kïm. And I have 10-blocks. I like Orange🍊🍊🍊 & Banana🍌 @ peach🍑🍑 that yummy...! <hr> Okay; I love it. I can eat 23 oranges at same time. lol Oh.... you can't? sorry😢. 
 
 
 #### to_capitalize 
@@ -115,12 +117,15 @@ Text_file
 * output
 
 
-    Hello, guys my name is kïm. and i have 10-blocks.
+    Hello, guys my name is kïm. And i have 10-blocks.
     I like         orange🍊🍊🍊 & banana🍌 @ peach🍑🍑 that yummy...!
+    <hr>
     
-    Okay; i love it. i can eat 23 oranges at same time.
+    Okay; i love it. I can eat 23 oranges at same time.
     
-    Oh.... you can't? sorry😢.
+    Lol
+    Oh.... You can't? sorry😢.
+
 
 
 #### to_lower
@@ -135,10 +140,13 @@ Text_file
 
     hello, guys my name is kïm. and i have 10-blocks.
     i like         orange🍊🍊🍊 & banana🍌 @ peach🍑🍑 that yummy...!
+    <hr>
     
     okay; i love it. i can eat 23 oranges at same time.
     
+    lol
     oh.... you can't? sorry😢.
+
 
 
 #### accent
@@ -153,9 +161,11 @@ Text_file
 
     Hello, guys my name is Kim. And I have 10-blocks.
     I like         Orange & Banana @ peach that yummy...!
+    <hr>
     
     Okay; I love it. I can eat 23 oranges at same time.
     
+    lol
     Oh.... you can't? sorry.
 
 
@@ -171,9 +181,11 @@ Text_file
 
     Hello, guys my name is Kïm. And I have 10-blocks.
     I like         Orange🍊🍊🍊 & Banana🍌 @ peach🍑🍑 that yummy...!
+    <hr>
     
     Okay; I love it. I can eat 23 oranges at same time.
     
+    lol
     Oh.... you can not? sorry😢.
 
 
@@ -189,10 +201,33 @@ Text_file
 
     Hello, guys my name is Km. And I have 10-blocks.
     I like         Orange & Banana @ peach that yummy...!
+    <hr>
     
     Okay; I love it. I can eat 23 oranges at same time.
     
+    lol
     Oh.... you can't? sorry.
+
+
+### emoji_to_text
+
+* input: option=emoji_to_text, value=whatever, value2=whatever
+
+
+    curl -X POST "https://master-pre-processor-fpem123.endpoint.ainize.ai/dpp" -H "accept: text/plain" -H "Content-Type: multipart/form-data" -F "option=emoji_to_text" -F "value=" -F "value2=" -F "text_file=@sample.txt;type=text/plain"
+
+
+* output
+
+
+    Hello, guys my name is Kïm. And I have 10-blocks.
+    I like         Orange tangerine tangerine tangerine & Banana banana @ peach peach peach that yummy...!
+    <hr>
+    
+    Okay; I love it. I can eat 23 oranges at same time.
+    
+    lol
+    Oh.... you can't? sorry crying_face.
 
 
 #### lemmatizer
@@ -207,10 +242,33 @@ Text_file
 
     hello , guy my name be Kïm . and I have 10 - block . 
     I like          Orange 🍊 🍊 🍊 & Banana 🍌 @ peach 🍑 🍑 that yummy ... ! 
+    < hr > 
     
     okay ; I love it . I can eat 23 orange at same time . 
     
+    lol 
     oh .... you ca n't ? sorry 😢 .
+
+
+### html_tag_remover
+
+* input: option=html_tag_remover, value=whatever, value2=whatever
+
+    
+    curl -X POST "https://master-pre-processor-fpem123.endpoint.ainize.ai/dpp" -H "accept: text/plain" -H "Content-Type: multipart/form-data" -F "option=html_tag_remover" -F "value=" -F "value2=" -F "text_file=@sample.txt;type=text/plain"
+
+
+* output: 
+
+
+    Hello, guys my name is Kïm. And I have 10-blocks.
+    I like         Orange🍊🍊🍊 & Banana🍌 @ peach🍑🍑 that yummy...!
+    
+    
+    Okay; I love it. I can eat 23 oranges at same time.
+    
+    lol
+    Oh.... you can't? sorry😢.
 
 
 #### number_to_text
@@ -225,9 +283,11 @@ Text_file
 
     Hello, guys my name is Kïm. And I have ten-blocks.
     I like         Orange🍊🍊🍊 & Banana🍌 @ peach🍑🍑 that yummy...!
+    <hr>
     
     Okay; I love it. I can eat twenty-three oranges at same time.
     
+    lol
     Oh.... you can't? sorry😢.
 
 
@@ -243,24 +303,27 @@ Text_file
 
     Hello, guys my name is Kïm. And I have number-blocks.
     I like         Orange🍊🍊🍊 & Banana🍌 @ peach🍑🍑 that yummy...!
+    <hr>
     
     Okay; I love it. I can eat number oranges at same time.
     
+    lol
     Oh.... you can't? sorry😢.
 
 
 #### short_line_remover
 
-* input: option=short_line_remover, value=3, value2=whatever
+* input: option=short_line_remover, value=4, value2=whatever
 
 
-    curl -X POST "https://master-pre-processor-fpem123.endpoint.ainize.ai/dpp" -H "accept: text/plain" -H "Content-Type: multipart/form-data" -F "option=short_line_remover" -F "value=3" -F "value=" -F "text_file=@sample.txt;type=text/plain"
+    curl -X POST "https://master-pre-processor-fpem123.endpoint.ainize.ai/dpp" -H "accept: text/plain" -H "Content-Type: multipart/form-data" -F "option=short_line_remover" -F "value=4" -F "value=" -F "text_file=@sample.txt;type=text/plain"
 
 * output
 
 
     Hello, guys my name is Kïm. And I have 10-blocks.
     I like         Orange🍊🍊🍊 & Banana🍌 @ peach🍑🍑 that yummy...!
+    <hr>
     Okay; I love it. I can eat 23 oranges at same time.
     Oh.... you can't? sorry😢.
 
@@ -277,8 +340,10 @@ Text_file
 
     Hello, guys name have-blocks.
      like         Orange🍊🍊🍊 & Banana🍌 @ peach🍑🍑 that yummy...!
+    >
     
     Okay love oranges same time.
+    
     
     ? sorry😢.
 
@@ -296,9 +361,11 @@ Text_file
 
     Hello, guys my name is Kïm. And I have 10-blocks.
     I like         Orange🍊🍊🍊 & Banana🍌 @ peach🍑🍑 that yummy....
+    <hr>
     
     Okay. I love it. I can eat 23 oranges at same time.
     
+    lol
     Oh.... you can't. sorry😢.
 
 
@@ -314,9 +381,11 @@ Text_file
 
     Hello, guys my name is Kïm. And I have 10-blocks.
     I like         Orange🍊🍊🍊 , Banana🍌 , peach🍑🍑 that yummy...!
+    ,hr,
     
     Okay, I love it. I can eat 23 oranges at same time.
     
+    lol
     Oh.... you can't, sorry😢.
 
 
@@ -332,9 +401,11 @@ Text_file
 
     Hello  guys my name is Kïm. And I have 10 blocks.
     I like         Orange🍊🍊🍊 & Banana🍌 @ peach🍑🍑 that yummy...!
+    <hr>
     
     Okay  I love it. I can eat 23 oranges at same time.
     
+    lol
     Oh.... you can't? sorry😢.
 
 
@@ -350,9 +421,11 @@ Text_file
 
     Hello, guys my name is Kïm. And I have 10-blocks.
     I like         Orange🍊🍊🍊 and Banana🍌 and peach🍑🍑 that yummy...!
+    <hr>
     
     Okay; I love it. I can eat 23 oranges at same time.
     
+    lol
     Oh.... you can't? sorry😢.
 
 
@@ -371,9 +444,11 @@ Text_file
 
     Hello, guys my name is Kïm. And I have 10-blocks.
     I like         Apple🍊🍊🍊 & Banana🍌 @ peach🍑🍑 that yummy...!
+    <hr>
     
     Okay; I love it. I can eat 23 oranges at same time.
     
+    lol
     Oh.... you can't? sorry😢.
 
     
