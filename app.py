@@ -182,11 +182,6 @@ def word_replacer(text, word, new):
 # => Hello, I got things -> Hello , I get thing
 def lemmatizer(text):
     doc = nlp(text)
-    tokens = []
-
-    # make lemmatize token
-    for token in doc:
-        tokens.append(token)
 
     lemmatized_sentence = " ".join([token.lemma_ for token in doc])
 
