@@ -27,7 +27,7 @@
 
         processing_checkbox = document.getElementById("options");
         processing_option = ["space_normalizer", "to_capitalize", "to_lower", "accent", "expander", "emoji_remover", "emoji_to_text", "lemmatizer",
-                             "html_tag_remover", "number_to_text", "number_normalizer", "short_line_remover", "short_word_remover",
+                             "html_tag_remover", "url_remover", "number_to_text", "number_normalizer", "short_line_remover", "short_word_remover",
                              "full_stop_normalizer", "comma_normalizer", "special_remover", "special_replacer", "word_replacer"];
         need_value = ["comma_normalizer", "full_stop_normalizer", "special_remover", "short_word_remover",
                       "short_line_remover", "number_normalizer"];
@@ -319,6 +319,7 @@
                         <li>emoji_to_text: Change emojis to text. No additional value required.</li>
                         <li>lemmatizer: Turns all words into basic form. (is -> be, bats -> bat). No additional value required.</li>
                         <li>html_tag_remover: Remove the html tag. No additional value required.</li>
+                        <li>url_remover: Remove url. No additional value required.</li>
                         <li>number_to_text: Turn numbers into words. No additional value required.</li>
                         <li>number_normalizer: Replace the number with another one you entered. Need additional value.</li>
                         <li>short_line_remover: It also takes a number and removes the lines shorter than the number. Need additional value.</li>

@@ -32,7 +32,7 @@ paths:
           - Option that does not require additional value
 
 
-              "space_normalizer", "to_capitalize", "to_lower", "accent", "expander", "emoji_remover", "emoji_to_text","lemmatizer", "html_tag_remover", "number_to_text"
+              "space_normalizer", "to_capitalize", "to_lower", "accent", "expander", "emoji_remover", "emoji_to_text","lemmatizer", "html_tag_remover", "url_remover", "number_to_text"
 
 
           - Option requiring additional value
@@ -67,8 +67,8 @@ paths:
                 option:
                   type: string
                   enum: ["space_normalizer", "to_capitalize", "to_lower", "accent", "expander", "emoji_remover", "emoji_to_text", "lemmatizer",
-                         "html_tag_remover", "number_to_text", "number_normalizer", "short_line_remover", "short_word_remover", "full_stop_normalizer",
-                         "comma_normalizer", "special_remover", "special_replacer", "word_replacer"]
+                         "html_tag_remover", "url_remover", "number_to_text", "number_normalizer", "short_line_remover", "short_word_remover",
+                         "full_stop_normalizer", "comma_normalizer", "special_remover", "special_replacer", "word_replacer"]
                   description: "The pre-processing option."
                 value:
                   type: string

@@ -188,6 +188,12 @@ def lemmatizer(text):
     return lemmatized_sentence
 
 
+def url_remover(text):
+    result = re.sub(r"http\S+", "", text)
+
+    return result
+
+
 ##
 # Reduce whitespace to one
 # ex) Hello,    guy -> Hello, guy
@@ -309,6 +315,8 @@ def transform(file, options):
                             line = word_replacer(line, value, value2)
                         elif option_name == "html_tag_remover":
                             line = html_tag_remover(line)
+                        elif option_name == "url_remover":
+                            line = url_remover(line)
 
                     r.write(line)
 

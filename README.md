@@ -42,6 +42,8 @@ This project pre-processor web server for NLP.
 
     html_tag_remover: Remove the html tag. No additional value required.
 
+    url_remover: Remove url. No additional value required.
+
     number_to_text: Turn numbers into words. No additional value required.
 
     number_normalizer: Replace the number with another one you entered. Need additional value.
