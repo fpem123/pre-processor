@@ -10,7 +10,9 @@ This project pre-processor web server for NLP.
     waitress
     Unidecode
     contractions
+    emoji
     flask
+    torch
     spacy (and "en_core_web_sm" spacy model)
 
 
