@@ -11,7 +11,7 @@ import contractions
 import unidecode
 import spacy
 from num2words import num2words
-import torch    # GPU check
+#import torch    # GPU check
 import emoji
 
 # internal module
@@ -36,8 +36,8 @@ UPLOAD_FOLDER = './data/upload'
 RESULT_FOLDER = './data/result'
 
 
-if torch.cuda.is_available():   # gpu check
-    spacy.prefer_gpu()      # spacy run GPU
+#if torch.cuda.is_available():   # gpu check
+#    spacy.prefer_gpu()      # spacy run GPU
 
 
 nlp = spacy.load('en_core_web_sm')  # spacy model load
